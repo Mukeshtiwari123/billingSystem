@@ -5,7 +5,8 @@ from .models import Charges
 from .models import Bills
 from .models import BillCharge
 from .models import Receipt
-
+from .models import ReceiptCharge
+from .models import PaymentMode
 
 class StudentForm(forms.Form):  
     firstname = forms.CharField(label="Enter first name",max_length=50)  
@@ -44,3 +45,18 @@ class ReceiptForm(forms.ModelForm):
     class Meta:
         model = Receipt
         fields = ['receipt_user', 'receipt_type', 'receipt_description', 'receipt_number', 'receipt_date', 'receipt_charges']
+
+
+
+class ReceiptChargeForm(forms.ModelForm):
+    class Meta:
+        model = ReceiptCharge
+        fields = ['receipt', 'charge', 'charge_type', 'amount']
+
+
+
+
+class PaymentModeForm(forms.ModelForm):
+    class Meta:
+        model = PaymentMode
+        fields = ['payment_mode_name', 'payment_mode_type_string']

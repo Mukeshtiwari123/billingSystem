@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Receipt Charges</h2>
+  <a href="{% url 'receipt_charge_create' %}">Add New Receipt Charge</a>
+  <ul>
+    {% for receipt_charge in receipt_charges %}
+      <li>
+        {{ receipt_charge.receipt }} - {{ receipt_charge.charge }} - {{ receipt_charge.amount }}
+        <a href="{% url 'receipt_charge_update' receipt_charge.pk %}">Edit</a> |
+        <a href="{% url 'receipt_charge_delete' receipt_charge.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

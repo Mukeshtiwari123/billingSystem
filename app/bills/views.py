@@ -4,12 +4,22 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Charges
 from .forms import ChargesForm
+
 from .models import Bills
 from .forms import BillsForm
+
 from .models import BillCharge
 from .forms import BillChargeForm
+
 from .models import Receipt
 from .forms import ReceiptForm
+
+from .models import ReceiptCharge
+from .forms import ReceiptChargeForm
+
+from .models import PaymentMode
+from .forms import PaymentModeForm
+
 
 
 # Create your views
@@ -175,3 +185,72 @@ def receipt_delete(request, pk):
         receipt.delete()
         return redirect('receipt_list')
     return render(request, 'receipts/receipt_confirm_delete.html', {'object': receipt})
+
+
+
+
+# Create view
+def receipt_charge_create(request):
+    if request.method == 'POST':
+        form = ReceiptChargeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('receipt_charge_list')
+    else:
+        form = ReceiptChargeForm()
+    return render(request, 'receipt_charge/receipt_charge_form.html', {'form': form})
+
+# List view
+def receipt_charge_list(request):
+    receipt_charges = ReceiptCharge.objects.all()
+    return render(request, 'receipt_charge/receipt_charge_list.html', {'receipt_charges': receipt_charges})
+
+# Update view
+def receipt_charge_update(request, pk):
+    receipt_charge = get_object_or_404(ReceiptCharge, pk=pk)
+    if request.method == 'POST':
+        form = ReceiptChargeForm(request.POST, instance=receipt_charge)
+        if form.is_valid():
+            form.save()
+            return redirect('receipt_charge_list')
+    else:
+        form = ReceiptChargeForm(instance=receipt_charge)
+    return render(request, 'receipt_charge/receipt_charge_form.html', {'form': form})
+
+# Delete view
+def receipt_charge_delete(request, pk):
+    receipt_charge = get_object_or_404(ReceiptCharge, pk=pk)
+    if request.method == 'POST':
+        receipt_charge.delete()
+        return redirect('receipt_charge_list')
+    return render(request, 'receipt_charge/receipt_charge_confirm_delete.html', {'object': receipt_charge})
+
+
+# Create view
+def payment_mode_create(request):
+    if request.method == 'POST':
+        form = PaymentModeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('payment_mode_list')
+    else:
+        form = PaymentModeForm()
+    return render(request, 'payment_mode/payment_mode_form.html', {'form': form})
+
+# List view
+def payment_mode_list(request):
+    payment_modes = PaymentMode.objects.all()
+    return render(request, 'payment_mode/payment_mode_list.html', {'payment_modes': payment_modes})
+
+# Update view
+def payment_mode_update(request, pk):
+    payment_mode = get_object_or_404(PaymentMode, pk=pk)
+    if request.method == 'POST':
+        form = PaymentModeForm(request.POST, instance=payment_mode)
+        if form.is_valid():
+            form.save()
+            return redirect('payment_mode_list')
+    else:
+        form = PaymentModeForm(instance=payment_mode)
+    return render(request, 'payment_mode/payment_mode_form.html', {'form': form})
+
