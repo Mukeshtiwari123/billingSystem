@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Are you sure you want to delete "{{ object.bil_number }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete it</button>
+    <a href="{% url 'bill_list' %}">Cancel</a>
+  </form>
+{% endblock %}

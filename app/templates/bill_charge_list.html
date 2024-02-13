@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Bill Charges</h2>
+  <a href="{% url 'bill_charge_create' %}">Add New Bill Charge</a>
+  <ul>
+    {% for bill_charge in bill_charges %}
+      <li>
+        {{ bill_charge.bill }} - {{ bill_charge.charge }} - {{ bill_charge.amount }}
+        <a href="{% url 'bill_charge_update' bill_charge.pk %}">Edit</a> |
+        <a href="{% url 'bill_charge_delete' bill_charge.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

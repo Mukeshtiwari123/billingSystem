@@ -1,0 +1,16 @@
+<!-- charge_list.html used for listing all charges-->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Charges</h2>
+  <a href="{% url 'charge_create' %}">Add New Charge</a>
+  <ul>
+    {% for charge in charges %}
+      <li>
+        {{ charge.charge_title }} -
+        <a href="{% url 'charge_update' charge.pk %}">Edit</a> |
+        <a href="{% url 'charge_delete' charge.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

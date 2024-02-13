@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Bills</h2>
+  <a href="{% url 'bill_create' %}">Add New Bill</a>
+  <ul>
+    {% for bill in bills %}
+      <li>
+        {{ bill.bil_number }} - {{ bill.bil_customer }}
+        <a href="{% url 'bill_update' bill.pk %}">Edit</a> |
+        <a href="{% url 'bill_delete' bill.pk %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

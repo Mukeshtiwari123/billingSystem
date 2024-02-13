@@ -1,0 +1,11 @@
+<!-- charge_form.html used for creating and updating charges-->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add/Edit Charge</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}

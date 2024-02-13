@@ -1,0 +1,11 @@
+<!-- charge_confirm_delete.html used or confirming a deletion-->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Are you sure you want to delete "{{ object.charge_title }}"?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete it</button>
+    <a href="{% url 'charge_list' %}">Cancel</a>
+  </form>
+{% endblock %}
