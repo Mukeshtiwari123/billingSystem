@@ -58,6 +58,7 @@ CORS_ORIGIN_WHITELIST = ['*']
 
 ROOT_URLCONF = 'app.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

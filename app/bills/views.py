@@ -28,6 +28,60 @@ def home(request):
     return HttpResponse("Welcome to my site!")
 
 
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'home.html')
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
+from django.contrib import messages
+from django.forms import ModelForm
+from django import forms
+
+class UserRegistrationForm(ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password',)
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords don\'t match.')
+        return cd['password2']
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
+            user = authenticate(username=new_user.username, password=form.cleaned_data['password'])
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'register.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Create your views
 from django.shortcuts import render  
 from bills.forms import StudentForm  
