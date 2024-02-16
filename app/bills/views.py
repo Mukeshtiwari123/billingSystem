@@ -22,6 +22,12 @@ from .forms import PaymentModeForm
 
 
 
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to my site!")
+
+
 # Create your views
 from django.shortcuts import render  
 from bills.forms import StudentForm  
@@ -226,31 +232,35 @@ def receipt_charge_delete(request, pk):
     return render(request, 'receipt_charge/receipt_charge_confirm_delete.html', {'object': receipt_charge})
 
 
-# Create view
+
+def payment_mode_list(request):
+    payment_modes = PaymentMode.objects.all()
+    return render(request, 'payment_mode_list.html', {'payment_modes': payment_modes})
+
 def payment_mode_create(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PaymentModeForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('payment_mode_list')
     else:
         form = PaymentModeForm()
-    return render(request, 'payment_mode/payment_mode_form.html', {'form': form})
+    return render(request, 'payment_mode_form.html', {'form': form})
 
-# List view
-def payment_mode_list(request):
-    payment_modes = PaymentMode.objects.all()
-    return render(request, 'payment_mode/payment_mode_list.html', {'payment_modes': payment_modes})
-
-# Update view
 def payment_mode_update(request, pk):
     payment_mode = get_object_or_404(PaymentMode, pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = PaymentModeForm(request.POST, instance=payment_mode)
         if form.is_valid():
             form.save()
             return redirect('payment_mode_list')
     else:
         form = PaymentModeForm(instance=payment_mode)
-    return render(request, 'payment_mode/payment_mode_form.html', {'form': form})
+    return render(request, 'payment_mode_form.html', {'form': form})
 
+def payment_mode_delete(request, pk):
+    payment_mode = get_object_or_404(PaymentMode, pk=pk)
+    if request.method == "POST":
+        payment_mode.delete()
+        return redirect('payment_mode_list')
+    return render(request, 'payment_mode_confirm_delete.html', {'payment_mode': payment_mode})

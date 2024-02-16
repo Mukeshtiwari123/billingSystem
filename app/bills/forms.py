@@ -8,6 +8,10 @@ from .models import Receipt
 from .models import ReceiptCharge
 from .models import PaymentMode
 
+
+
+
+
 class StudentForm(forms.Form):  
     firstname = forms.CharField(label="Enter first name",max_length=50)  
     lastname  = forms.CharField(label="Enter last name", max_length = 100)
@@ -54,6 +58,12 @@ class ReceiptChargeForm(forms.ModelForm):
         fields = ['receipt', 'charge', 'charge_type', 'amount']
 
 
+
+
+class PaymentModeForm(forms.ModelForm):
+    class Meta:
+        model = PaymentMode
+        fields = ['payment_mode_name', 'payment_mode_type_string']
 
 
 class PaymentModeForm(forms.ModelForm):

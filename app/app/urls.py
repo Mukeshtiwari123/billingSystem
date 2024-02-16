@@ -17,20 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from bills import views 
+from bills.views import receipt_charge_list, receipt_charge_create, receipt_charge_update, receipt_charge_delete
+from bills.views import payment_mode_list, payment_mode_create, payment_mode_update, payment_mode_delete
 
-from .views import (
-    payment_mode_create, 
-    payment_mode_list, 
-    payment_mode_update, 
-    payment_mode_delete,
-)
+
+# from . import views  # Adjust this import based on your project structure
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
     path('example/', views.example_view),
-   
+    path('', views.home, name='home'),  # Map the root URL to the home view
+    # Include other URL patterns below
+
     # All Charges URL 
     path('charges/', views.charge_list, name='charge_list'),
     path('charges/add/', views.charge_create, name='charge_create'),
@@ -69,6 +69,4 @@ urlpatterns = [
     path('payment_mode/<int:pk>/edit/', payment_mode_update, name='payment_mode_update'),
     path('payment_mode/<int:pk>/delete/', payment_mode_delete, name='payment_mode_delete'),
 ]
-
-   
 
