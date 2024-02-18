@@ -318,3 +318,26 @@ def payment_mode_delete(request, pk):
         payment_mode.delete()
         return redirect('payment_mode_list')
     return render(request, 'payment_mode_confirm_delete.html', {'payment_mode': payment_mode})
+
+
+# app/views.py
+from django.http import HttpResponse
+from .models import Bills, Receipt
+from .utils import render_to_pdf
+
+def bill_pdf_view(request, pk):
+    try:
+        bill = Bills.objects.get(pk=pk)
+        context = {'bill': bill}
+        return render_to_pdf('bills/pdf_template.html', context)
+    except Bills.DoesNotExist:
+        return HttpResponse("Bill not found.", status=404)
+
+def receipt_pdf_view(request, pk):
+    try:
+        receipt = Receipt.objects.get(pk=pk)
+        context = {'receipt': receipt}
+        return render_to_pdf('receipts/pdf_template.html', context)
+    except Receipt.DoesNotExist:
+        return HttpResponse("Receipt not found.", status=404)
+

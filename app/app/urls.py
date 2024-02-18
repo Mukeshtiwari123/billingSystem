@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from bills import views 
 from bills.views import receipt_charge_list, receipt_charge_create, receipt_charge_update, receipt_charge_delete
-from bills.views import payment_mode_list, payment_mode_create, payment_mode_update, payment_mode_delete
+from bills.views import payment_mode_list, payment_mode_create, payment_mode_update, payment_mode_delete, bill_pdf_view, receipt_pdf_view
 
 from django.urls import path
 from django.contrib.auth import views as auth_views
@@ -79,5 +79,10 @@ urlpatterns = [
     path('payment_mode/add/', payment_mode_create, name='payment_mode_create'),
     path('payment_mode/<int:pk>/edit/', payment_mode_update, name='payment_mode_update'),
     path('payment_mode/<int:pk>/delete/', payment_mode_delete, name='payment_mode_delete'),
+
+# All PDF URL 
+    path('bills/<int:pk>/pdf/', bill_pdf_view, name='bill_pdf'),
+    path('receipts/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
+
 ]
 

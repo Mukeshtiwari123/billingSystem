@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            font-size: 14px;
+        }
+        .header,
+        .footer {
+            text-align: center;
+            color: #666;
+        }
+        .receipt-details {
+            margin-top: 20px;
+        }
+        .receipt-details th,
+        .receipt-details td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Receipt</h1>
+    </div>
+
+    <div class="receipt-info">
+        <p><strong>Receipt Number:</strong> {{ receipt.receipt_number }}</p>
+        <p><strong>Date:</strong> {{ receipt.receipt_date }}</p>
+        <p><strong>Description:</strong> {{ receipt.receipt_description }}</p>
+    </div>
+
+    <table class="receipt-details">
+        <tr>
+            <th>Charge Title</th>
+            <th>Amount</th>
+        </tr>
+        {% for charge in receipt.receipt_charges.all %}
+        <tr>
+            <td>{{ charge.charge_title }}</td>
+            <td>${{ charge.charge_fixed_rate }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="footer">
+        <p>Thank you!</p>
+    </div>
+</body>
+</html>
