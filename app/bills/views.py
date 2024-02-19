@@ -341,3 +341,6 @@ def receipt_pdf_view(request, pk):
     except Receipt.DoesNotExist:
         return HttpResponse("Receipt not found.", status=404)
 
+
+
+

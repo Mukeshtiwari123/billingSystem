@@ -3,22 +3,11 @@
 <html>
 <head>
     <title>My Billing System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
    <style>
-    /* body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-} */
-
-/* Add more selectors and styles as needed */
-
-        /* body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .header, .footer { background-color: #f3f3f3; text-align: center; padding: 20px 0; }
-        .nav { background-color: #333; overflow: hidden; }
-        .nav a { float: left; color: white; text-align: center; padding: 14px 20px; text-decoration: none; }
-        .nav a:hover { background-color: #ddd; color: black; }
-        .container { padding: 20px; } */
-       
-        body {
+    
+    body {
         margin: 0;
         font-family: Arial, sans-serif;
         background-color: #f4f4f4;
@@ -60,16 +49,40 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
-    .footer {
-        background-color: #007bff;
-        color: #ffffff;
-        text-align: center;
-        padding: 20px 0;
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
+   /* Footer styling */
+footer {
+    background-color: #333; /* Dark background for the footer */
+    color: #fff; /* White text color */
+    padding: 20px 0; /* Padding around the footer content */
+    text-align: center; /* Center-align the content */
+}
+
+/* Social links styling */
+.social-links {
+    margin: 0 auto;
+    display: inline-block; /* Align the links in a row */
+}
+
+.social-links a {
+    display: inline-block; /* Display links inline-block for spacing */
+    margin: 0 10px; /* Add margin to space out the icons */
+    color: #fff; /* Icon color */
+    font-size: 24px; /* Icon size */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.social-links a:hover {
+    color: #4CAF50; /* Change icon color on hover */
+}
+
+/* Example of responsive adjustments */
+@media (max-width: 600px) {
+    .social-links a {
+        margin: 0 5px; /* Reduce margin for smaller screens */
+        font-size: 20px; /* Adjust icon size for smaller screens */
     }
+}
+
     
     h1, h2 {
         color: #333;
@@ -88,6 +101,31 @@
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
+    .btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.btn-primary:active {
+  background-color: #004085;
+  color: #ccc;
+}
+
    </style>
 </head>
 <body>
@@ -108,7 +146,27 @@
     {% endblock %}
 </div>
 <div class="footer">
-    <p>Footer Content &copy; 2024</p>
+    <footer>
+        <div class="social-links">
+            <!-- WhatsApp -->
+            <a href="https://wa.me/yourphonenumber" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <!-- Placeholder for "X" social media -->
+            <a href="https://www.x-accounts.com/login" target="_blank" title="X">
+                <i class="fab fa-x"></i> <!-- Replace "fa-example" with the correct class for your "X" social media -->
+            </a>
+        </div>
+    </footer>
+    
 </div>
 </body>
 </html>

@@ -83,6 +83,7 @@ urlpatterns = [
 # All PDF URL 
     path('bills/<int:pk>/pdf/', bill_pdf_view, name='bill_pdf'),
     path('receipts/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
+    path('bill/<int:pk>/pdf/', bill_pdf_view, name='bill_pdf'),
 
 ]
 

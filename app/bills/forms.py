@@ -29,10 +29,11 @@ class ChargesForm(forms.ModelForm):
 class BillsForm(forms.ModelForm):
     class Meta:
         model = Bills
-        fields = ['bil_customer', 'bil_type', 'bil_description', 'bil_number', 'bil_receipt_date', 'bil_charges']
+        fields = ['bil_customer', 'bil_type', 'bil_description', 'bil_number', 'bil_receipt_date', 'bil_charges','bil_items']
         widgets = {
             'bil_receipt_date': forms.DateInput(attrs={'type': 'date'}),
             'bil_charges': forms.CheckboxSelectMultiple,
+            # 'bil_items': forms.CheckboxSelectMultiple,
         }
 
 
