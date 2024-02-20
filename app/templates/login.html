@@ -1,28 +1,124 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="login-container">
-    <h2>Login</h2>
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <a href="{% url 'register' %}">Register</a>
-</div>
-{% endblock %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+<title> Login Page</title>
+<link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
-    .login-container {
-    width: 300px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-}
+    @import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300);
+    @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 
-.login-container form {
+    /* * {
+        box-sizing: border-box;
+    } */
+
+    /* body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: blue;
+}  */
+
+
+    .container {
+        width: 300px;
+        margin: auto;
+        padding: 20px;
+        /* border: 1px solid #ccc; */
+        /* border-radius: 5px; */
+        text-align: center;
+    }
+
+    /* .login-container form {
     margin-bottom: 20px;
-}
+} */
 
+
+
+    input[type="text"] {
+        width: 100%;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        margin: 8px 0px;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: 0.3s;
+    }
+
+    input[type="text"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
+
+    .inputWithIcon input[type="text"] {
+        padding-left: 40px;
+    }
+
+    .inputWithIcon {
+        position: relative;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .inputWithIcon i {
+        position: absolute;
+        left: 10;
+        top: 8px;
+        padding: 9px 8px;
+        color: #aaa;
+        transition: 0.3s;
+    }
+
+    .inputWithIcon input[type="text"]:focus+i {
+        color: dodgerBlue;
+    }
+
+    /* .container {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}  */
 </style>
+</head>
+
+<body>
+    <div class="container">
+        
+    <h2><u>Lo</u>gin</h2>
+    <div class = "inputWithIcon">  
+        <input type = "text" placeholder = "Enter your email" required>  
+        <i class = "fa fa-envelope fa-lg fa-fw" aria-hidden = "true"> </i>  
+    </div>  
+    <div class = "inputWithIcon">  
+        <input type = "text" placeholder = "Confirm a password" required>  
+        <i class = "fa fa-key fa-lg fa-fw" aria-hidden = "true"> </i>                 
+    </div>             
+        <input type="checkbox" id="c"> <label for="c"><small>Remember me</small></label>
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 
+    <a href="forgot.html"><small> Forgot password?</small></a><br><br>
+
+        <input type="submit" value="Login Now"><br><br>
+    <p align="center"><small>Don't have an account?</small><a href="https://8000-mukeshtiwar-billingsyst-2q2bomt2cp4.ws-us108.gitpod.io/register/">Signup now</a>.</p>
+
+    </div>
+    
+
+    {% endblock %}

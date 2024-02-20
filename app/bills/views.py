@@ -71,27 +71,35 @@ def register(request):
 
 
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')  # Redirect to a success page.
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html')  # The template name might be different in your case.
 
 
 
 
+# # Create your views
+# from django.shortcuts import render  
+# from bills.forms import StudentForm  
 
+# def example_view(request):
+#     return render(request, 'example.html')
 
-
-
-
-
-
-# Create your views
-from django.shortcuts import render  
-from bills.forms import StudentForm  
-
-def example_view(request):
-    return render(request, 'example.html')
-
-def index(request):  
-    student = StudentForm()  
-    return render(request,"index.html",{'form':student})
+# def index(request):  
+#     student = StudentForm()  
+#     return render(request,"index.html",{'form':student})
 
 
 
@@ -320,7 +328,7 @@ def payment_mode_delete(request, pk):
     return render(request, 'payment_mode_confirm_delete.html', {'payment_mode': payment_mode})
 
 
-# app/views.py
+# for  bills pdf  generations
 from django.http import HttpResponse
 from .models import Bills, Receipt
 from .utils import render_to_pdf

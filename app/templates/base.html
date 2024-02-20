@@ -1,152 +1,166 @@
 <!-- base.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Billing System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
-   <style>
-    
-    body {
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}My Billing System{% endblock %}</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<style>
+    body,
+    html {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
+        padding: 0;
+        height: 100%;
     }
-    
-    .header {
+
+    header,
+    footer {
+        /* text-align: center; */
+        padding: 1em;
+        background-color: #f0f0f0;
+    }
+
+    .welcome-section {
+        height: 50vh;
+        /* Half the height of the viewport */
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        box-shadow: 0 10px 12px -10px black;
+        /* Shadow effect */
+    }
+
+    .welcome-section h1 {
+        font-size: 2em;
+        position: relative;
+        z-index: 1;
+    }
+
+
+    .btn {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        color: #fff;
+    }
+
+    .btn-primary:active {
+        background-color: #004085;
+        color: #ccc;
+    }
+
+    header  {
         background-color: #007bff;
         color: #ffffff;
         text-align: center;
         padding: 20px 0;
     }
-    
-    .nav {
-        background-color: #333;
+
+    nav {
+        background-color: #06f06000;
         overflow: hidden;
     }
-    
-    .nav a {
+
+    nav a {
         float: left;
         display: block;
-        color: white;
-        text-align: center;
+        color: rgba(56, 15, 238, 0);
+        text-align: right;
         padding: 14px 20px;
         text-decoration: none;
         transition: 0.3s background-color;
     }
-    
-    .nav a:hover {
+
+    nav a:hover {
         background-color: #ddd;
         color: black;
     }
-    
-    .container {
-        padding: 20px;
-        background-color: #ffffff;
-        margin: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-   /* Footer styling */
-footer {
-    background-color: #333; /* Dark background for the footer */
-    color: #fff; /* White text color */
-    padding: 20px 0; /* Padding around the footer content */
-    text-align: center; /* Center-align the content */
-}
 
-/* Social links styling */
-.social-links {
-    margin: 0 auto;
-    display: inline-block; /* Align the links in a row */
-}
-
-.social-links a {
-    display: inline-block; /* Display links inline-block for spacing */
-    margin: 0 10px; /* Add margin to space out the icons */
-    color: #fff; /* Icon color */
-    font-size: 24px; /* Icon size */
-    transition: color 0.3s; /* Smooth transition for hover effect */
-}
-
-.social-links a:hover {
-    color: #4CAF50; /* Change icon color on hover */
-}
-
-/* Example of responsive adjustments */
-@media (max-width: 600px) {
-    .social-links a {
-        margin: 0 5px; /* Reduce margin for smaller screens */
-        font-size: 20px; /* Adjust icon size for smaller screens */
-    }
-}
-
-    
-    h1, h2 {
-        color: #333;
-    }
-    
-    p {
-        line-height: 1.6;
-    }
-
-    .login-form {
-        width: 300px;
+    /* Social links styling */
+    .social-links {
         margin: 0 auto;
-        padding: 20px;
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: inline-block;
+        /* Align the links in a row */
     }
 
-    .btn {
-  display: inline-block;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
+    .social-links a {
+        display: inline-block;
+        /* Display links inline-block for spacing */
+        margin: 0 10px;
+        /* Add margin to space out the icons */
+        color: #fff;
+        /* Icon color */
+        font-size: 24px;
+        /* Icon size */
+        transition: color 0.3s;
+        /* Smooth transition for hover effect */
+    }
 
-.btn-primary:hover {
-  background-color: #0056b3;
-  color: #fff;
-}
+    .social-links a:hover {
+        color: #4CAF50;
+        /* Change icon color on hover */
+    }
 
-.btn-primary:active {
-  background-color: #004085;
-  color: #ccc;
-}
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 1em 0;
+        background-color: #333;
+        /* Dark background for the footer */
+        color: #fff;
+        /* White text color */
+        padding: 20px 0;
+        /* Padding around the footer content */
+        text-align: center;
+        /* Center-align the content */
+        flex-shrink: 0;
+        /* Prevents the footer from shrinking */
+        /* Your footer styling */
+        /* padding: 20px; */
+        /* background-color: #ddd; */
 
-   </style>
+    }
+</style>
+
 </head>
+
 <body>
-<div class="header">
-    <h1>Welcome to My Billing System</h1>
-</div>
-<div class="nav">
-    <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'charge_list' %}">Charges</a>
-    <a href="{% url 'bill_list' %}">Bills</a>
-    <a href="{% url 'receipt_list' %}">Receipts</a>
-    <a href="{% url 'payment_mode_list' %}">Payment Modes</a>
-    <a href="{% url 'login' %}" style="float:right;">Login</a>
-    <a href="{% url 'register' %}" style="float:right;">Register</a>
-</div>
-<div class="container">
+    <header>
+        <div class="header">
+            <h1>Welcome to My Billing System</h1>
+        </div>
+       <nav>
+            <!-- Links to different modules -->
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'charge_list' %}">Charges</a>
+            <a href="{% url 'bill_list' %}">Bills</a>
+            <a href="{% url 'receipt_list' %}">Receipts</a>
+            <a href="{% url 'payment_mode_list' %}">Payment Modes</a>
+            <a href="{% url 'login' %}" style="float:right;">Login</a>
+            <a href="{% url 'register' %}" style="float:right;">Register</a>
+        </nav>
+    </header>
     {% block content %}
     {% endblock %}
-</div>
-<div class="footer">
-    <footer>
+
+    <div class="footer">
+
         <div class="social-links">
             <!-- WhatsApp -->
             <a href="https://wa.me/yourphonenumber" target="_blank" title="WhatsApp">
@@ -165,8 +179,8 @@ footer {
                 <i class="fab fa-x"></i> <!-- Replace "fa-example" with the correct class for your "X" social media -->
             </a>
         </div>
-    </footer>
-    
-</div>
+
+    </div>
 </body>
+
 </html>
