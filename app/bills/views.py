@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.contrib.auth.decorators import login_required
+
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Charges
@@ -30,6 +32,7 @@ def home(request):
 
 from django.shortcuts import render
 
+@login_required
 def home(request):
     return render(request, 'home.html')
 
@@ -72,8 +75,9 @@ def register(request):
 
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.urls import reverse
 
 def user_login(request):
     if request.method == 'POST':
@@ -82,10 +86,15 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')  # Redirect to a success page.
+            return redirect('home')  # Redirect to a home or dashboard page
         else:
             messages.error(request, 'Invalid username or password.')
-    return render(request, 'login.html')  # The template name might be different in your case.
+    return render(request, 'login.html')  # Path to your login template
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')  # Redirect back to the login page
+
 
 
 
@@ -102,7 +111,7 @@ def user_login(request):
 #     return render(request,"index.html",{'form':student})
 
 
-
+@login_required
 # Create view
 def charge_create(request):
     if request.method == 'POST':
@@ -114,11 +123,13 @@ def charge_create(request):
         form = ChargesForm()
     return render(request, 'charges/charge_form.html', {'form': form})
 
+@login_required
 # Read/List view
 def charge_list(request):
     charges = Charges.objects.all()
     return render(request, 'charges/charge_list.html', {'charges': charges})
 
+@login_required
 # Update view
 def charge_update(request, pk):
     charge = get_object_or_404(Charges, pk=pk)
@@ -131,6 +142,7 @@ def charge_update(request, pk):
         form = ChargesForm(instance=charge)
     return render(request, 'charges/charge_form.html', {'form': form})
 
+@login_required
 # Delete view
 def charge_delete(request, pk):
     charge = get_object_or_404(Charges, pk=pk)
@@ -141,7 +153,7 @@ def charge_delete(request, pk):
 
 
 
-
+@login_required
 # Create view
 def bill_create(request):
     if request.method == 'POST':
@@ -153,11 +165,13 @@ def bill_create(request):
         form = BillsForm()
     return render(request, 'bills/bill_form.html', {'form': form})
 
+@login_required
 # Read/List view
 def bill_list(request):
     bills = Bills.objects.all()
     return render(request, 'bills/bill_list.html', {'bills': bills})
 
+@login_required
 # Update view
 def bill_update(request, pk):
     bill = get_object_or_404(Bills, pk=pk)
@@ -170,6 +184,7 @@ def bill_update(request, pk):
         form = BillsForm(instance=bill)
     return render(request, 'bills/bill_form.html', {'form': form})
 
+@login_required
 # Delete view
 def bill_delete(request, pk):
     bill = get_object_or_404(Bills, pk=pk)
@@ -179,7 +194,7 @@ def bill_delete(request, pk):
     return render(request, 'bills/bill_confirm_delete.html', {'object': bill})
 
 
-
+@login_required
 # Create view
 def bill_charge_create(request):
     if request.method == 'POST':
@@ -191,11 +206,13 @@ def bill_charge_create(request):
         form = BillChargeForm()
     return render(request, 'bill_charge/bill_charge_form.html', {'form': form})
 
+@login_required
 # Read/List view
 def bill_charge_list(request):
     bill_charges = BillCharge.objects.all()
     return render(request, 'bill_charge/bill_charge_list.html', {'bill_charges': bill_charges})
 
+@login_required
 # Update view
 def bill_charge_update(request, pk):
     bill_charge = get_object_or_404(BillCharge, pk=pk)
@@ -208,6 +225,7 @@ def bill_charge_update(request, pk):
         form = BillChargeForm(instance=bill_charge)
     return render(request, 'bill_charge/bill_charge_form.html', {'form': form})
 
+@login_required
 # Delete view
 def bill_charge_delete(request, pk):
     bill_charge = get_object_or_404(BillCharge, pk=pk)
@@ -217,7 +235,7 @@ def bill_charge_delete(request, pk):
     return render(request, 'bill_charge/bill_charge_confirm_delete.html', {'object': bill_charge})
 
 
-
+@login_required
 # Create view
 def receipt_create(request):
     if request.method == 'POST':
@@ -229,11 +247,13 @@ def receipt_create(request):
         form = ReceiptForm()
     return render(request, 'receipts/receipt_form.html', {'form': form})
 
+@login_required
 # Read/List view
 def receipt_list(request):
     receipts = Receipt.objects.all()
     return render(request, 'receipts/receipt_list.html', {'receipts': receipts})
 
+@login_required
 # Update view
 def receipt_update(request, pk):
     receipt = get_object_or_404(Receipt, pk=pk)
@@ -246,6 +266,7 @@ def receipt_update(request, pk):
         form = ReceiptForm(instance=receipt)
     return render(request, 'receipts/receipt_form.html', {'form': form})
 
+@login_required
 # Delete view
 def receipt_delete(request, pk):
     receipt = get_object_or_404(Receipt, pk=pk)
@@ -256,7 +277,7 @@ def receipt_delete(request, pk):
 
 
 
-
+@login_required
 # Create view
 def receipt_charge_create(request):
     if request.method == 'POST':
@@ -268,11 +289,13 @@ def receipt_charge_create(request):
         form = ReceiptChargeForm()
     return render(request, 'receipt_charge/receipt_charge_form.html', {'form': form})
 
+@login_required
 # List view
 def receipt_charge_list(request):
     receipt_charges = ReceiptCharge.objects.all()
     return render(request, 'receipt_charge/receipt_charge_list.html', {'receipt_charges': receipt_charges})
 
+@login_required
 # Update view
 def receipt_charge_update(request, pk):
     receipt_charge = get_object_or_404(ReceiptCharge, pk=pk)
@@ -285,6 +308,7 @@ def receipt_charge_update(request, pk):
         form = ReceiptChargeForm(instance=receipt_charge)
     return render(request, 'receipt_charge/receipt_charge_form.html', {'form': form})
 
+@login_required
 # Delete view
 def receipt_charge_delete(request, pk):
     receipt_charge = get_object_or_404(ReceiptCharge, pk=pk)
@@ -294,11 +318,12 @@ def receipt_charge_delete(request, pk):
     return render(request, 'receipt_charge/receipt_charge_confirm_delete.html', {'object': receipt_charge})
 
 
-
+@login_required
 def payment_mode_list(request):
     payment_modes = PaymentMode.objects.all()
     return render(request, 'payment_mode_list.html', {'payment_modes': payment_modes})
 
+@login_required
 def payment_mode_create(request):
     if request.method == "POST":
         form = PaymentModeForm(request.POST)
@@ -309,6 +334,7 @@ def payment_mode_create(request):
         form = PaymentModeForm()
     return render(request, 'payment_mode_form.html', {'form': form})
 
+@login_required
 def payment_mode_update(request, pk):
     payment_mode = get_object_or_404(PaymentMode, pk=pk)
     if request.method == "POST":
@@ -320,6 +346,7 @@ def payment_mode_update(request, pk):
         form = PaymentModeForm(instance=payment_mode)
     return render(request, 'payment_mode_form.html', {'form': form})
 
+@login_required
 def payment_mode_delete(request, pk):
     payment_mode = get_object_or_404(PaymentMode, pk=pk)
     if request.method == "POST":

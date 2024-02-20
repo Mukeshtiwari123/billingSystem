@@ -130,3 +130,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Redirect to home page after login
+LOGIN_REDIRECT_URL = '/bills'
+
+# Redirect to home page after logout
+LOGOUT_REDIRECT_URL = '/'
+

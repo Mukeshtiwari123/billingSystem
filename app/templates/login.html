@@ -12,9 +12,9 @@
     @import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300);
     @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 
-    /* * {
+    * {
         box-sizing: border-box;
-    } */
+    }
 
     /* body {
     font-family: Arial, sans-serif;
@@ -31,8 +31,8 @@
         width: 300px;
         margin: auto;
         padding: 20px;
-        /* border: 1px solid #ccc; */
-        /* border-radius: 5px; */
+        border: 1px solid #ccc;
+        border-radius: 5px;
         text-align: center;
     }
 
@@ -42,7 +42,8 @@
 
 
 
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
         width: 100%;
         border: 2px solid #aaa;
         border-radius: 4px;
@@ -53,12 +54,14 @@
         transition: 0.3s;
     }
 
-    input[type="text"]:focus {
+    input[type="text"]:focus,
+    input[type="password"]:focus {
         border-color: dodgerBlue;
         box-shadow: 0 0 8px 0 dodgerBlue;
     }
 
-    .inputWithIcon input[type="text"] {
+    .inputWithIcon input[type="text"],
+    .inputWithIcon input[type="password"] {
         padding-left: 40px;
     }
 
@@ -85,7 +88,8 @@
         transition: 0.3s;
     }
 
-    .inputWithIcon input[type="text"]:focus+i {
+    .inputWithIcon input[type="text"]:focus+i,
+    .inputWithIcon input[type="password"]:focus+i {
         color: dodgerBlue;
     }
 
@@ -101,24 +105,28 @@
 
 <body>
     <div class="container">
-        
-    <h2><u>Lo</u>gin</h2>
-    <div class = "inputWithIcon">  
-        <input type = "text" placeholder = "Enter your email" required>  
-        <i class = "fa fa-envelope fa-lg fa-fw" aria-hidden = "true"> </i>  
-    </div>  
-    <div class = "inputWithIcon">  
-        <input type = "text" placeholder = "Confirm a password" required>  
-        <i class = "fa fa-key fa-lg fa-fw" aria-hidden = "true"> </i>                 
-    </div>             
-        <input type="checkbox" id="c"> <label for="c"><small>Remember me</small></label>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 
-    <a href="forgot.html"><small> Forgot password?</small></a><br><br>
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h2><u>Lo</u>gin</h2>
+            <div class="inputWithIcon">
+                <input type="text" name="username" placeholder="Enter your email" required>
+                <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"> </i>
+            </div>
+            <div class="inputWithIcon">
+                <input type="password" name="password" placeholder="Confirm a password" required>
+                <i class="fa fa-key fa-lg fa-fw" aria-hidden="true"> </i>
+            </div>
+            <input type="checkbox" id="c"> <label for="c"><small>Remember me</small></label>
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+            <a href="forgot.html"><small> Forgot password?</small></a><br><br>
 
-        <input type="submit" value="Login Now"><br><br>
-    <p align="center"><small>Don't have an account?</small><a href="https://8000-mukeshtiwar-billingsyst-2q2bomt2cp4.ws-us108.gitpod.io/register/">Signup now</a>.</p>
-
+            <input type="submit" value="Login Now"><br><br>
+            <p align="center"><small>Don't have an account?</small><a href="{% url 'register' %}">Signup now</a>.
+            </p>
+        </form>
     </div>
-    
 
     {% endblock %}
