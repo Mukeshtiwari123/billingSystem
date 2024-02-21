@@ -34,9 +34,10 @@
 		.container {
 			width: 300px;
 			margin: auto;
+			margin-top: 10px;
 			padding: 20px;
 			border: 1px solid #ccc;
-			border-radius: 5px;
+			border-radius: 7px;
 			text-align: center;
 		}
 
@@ -46,7 +47,8 @@
 
 
 
-		input[type="text"] {
+		input[type="text"],
+		[type="password"] {
 			width: 100%;
 			border: 2px solid #aaa;
 			border-radius: 4px;
@@ -57,12 +59,14 @@
 			transition: 0.3s;
 		}
 
-		input[type="text"]:focus {
+		input[type="text"],
+		[type="password"]:focus {
 			border-color: dodgerBlue;
 			box-shadow: 0 0 8px 0 dodgerBlue;
 		}
 
-		.inputWithIcon input[type="text"] {
+		.inputWithIcon input[type="text"],
+		[type="password"] {
 			padding-left: 40px;
 		}
 
@@ -79,7 +83,8 @@
 			transition: 0.3s;
 		}
 
-		.inputWithIcon input[type="text"]:focus+i {
+		.inputWithIcon input[type="text"],
+		[type="password"]:focus+i {
 			color: dodgerBlue;
 		}
 
@@ -119,11 +124,11 @@
 				<i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"> </i>
 			</div>
 			<div class="inputWithIcon">
-				<input type="text" placeholder="Create a password" required>
+				<input type="password" name="password" placeholder="Create a password" required>
 				<i class="fa fa-key fa-lg fa-fw" aria-hidden="true"> </i>
 			</div>
 			<div class="inputWithIcon">
-				<input type="text" placeholder="Confirm a password" required>
+				<input type="password" name="password" placeholder="Confirm a password" required>
 				<i class="fa fa-key fa-lg fa-fw" aria-hidden="true"> </i>
 			</div>
 

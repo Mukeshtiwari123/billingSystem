@@ -12,4 +12,10 @@
   </li>
   {% endfor %}
 </ul>
+{% for receipt in receipts %}
+<div class="receipt">
+  <!-- Display bill details -->
+  <a href="{% url 'receipt_pdf' pk=receipt.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
+</div>
+{% endfor %}
 {% endblock %}

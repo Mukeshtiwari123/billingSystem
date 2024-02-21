@@ -52,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-mukeshtiwar-billingsyst-2q2bomt2cp4.ws-us108.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io']
 
 CORS_ORIGIN_WHITELIST = ['*']
 
