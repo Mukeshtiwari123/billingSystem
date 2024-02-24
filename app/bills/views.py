@@ -58,6 +58,7 @@ class UserRegistrationForm(ModelForm):
         return cd['password2']
 
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -65,12 +66,15 @@ def register(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
             new_user.save()
+            # Authenticate and login are optional here, depending on whether you want to log the user in directly after registration
             user = authenticate(username=new_user.username, password=form.cleaned_data['password'])
             login(request, user)
-            return redirect('/')
+            # Redirect to login page after successful registration
+            return redirect('login')  # Use the name of your login route
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form': form})
+
 
 
 

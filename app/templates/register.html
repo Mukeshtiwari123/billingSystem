@@ -1,114 +1,131 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale = 1.0">
+<title> Login Page</title>
+<link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
+<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale = 1.0">
-	<title>Registration Page</title>
-	<link rel="stylesheet" href="https://codepen.io/gymratpacks/pen/VKzBEp#0">
-	<link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
-		@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300);
-		@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300);
+	@import url(http://weloveiconfonts.com/api/?family=fontawesome);
 
-		* {
-			box-sizing: border-box;
+	* {
+		box-sizing: border-box;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
 		}
 
-		/* body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-			display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: blue;
-        } 
-		 */
-
-
-		.container {
-			width: 300px;
-			margin: auto;
-			margin-top: 10px;
-			padding: 20px;
-			border: 1px solid #ccc;
-			border-radius: 7px;
-			text-align: center;
+		to {
+			opacity: 1;
 		}
+	}
 
-		.container form {
-			margin-bottom: 20px;
-		}
+	.container {
+		animation: fadeIn 1s ease-out;
+	}
+
+	.container {
+		width: 300px;
+		margin: auto;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		padding: 20px;
+		border: 2px solid #ccc;
+		border-radius: 5px;
+		text-align: center;
+		animation: fadeIn 1s ease-out;
+		/* Apply the fade-in animation */
+	}
+
+	/* body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: blue;
+}  */
 
 
+	/* for adding the animation effect on to this page */
+	input[type="text"]:focus,
+	input[type="password"]:focus {
+		border-color: dodgerBlue;
+		box-shadow: 0 0 8px 0 dodgerBlue;
+		transform: scale(1.03);
+		/* Scale up the input field a bit */
+		transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+	}
 
-		input[type="text"],
-		[type="password"] {
-			width: 100%;
-			border: 2px solid #aaa;
-			border-radius: 4px;
-			margin: 8px 0px;
-			outline: none;
-			padding: 8px;
-			box-sizing: border-box;
-			transition: 0.3s;
-		}
+	/* to Enhance Icon Interaction */
+	.inputWithIcon input[type="text"]:focus+i,
+	.inputWithIcon input[type="password"]:focus+i {
+		color: dodgerBlue;
+		transform: scale(1.1);
+		/* Optional: Scale the icon a bit */
+	}
 
-		input[type="text"],
-		[type="password"]:focus {
-			border-color: dodgerBlue;
-			box-shadow: 0 0 8px 0 dodgerBlue;
-		}
 
-		.inputWithIcon input[type="text"],
-		[type="password"] {
-			padding-left: 40px;
-		}
+	input[type="text"],
+	input[type="password"] {
+		width: 100%;
+		border: 2px solid #aaa;
+		border-radius: 4px;
+		margin: 8px 0px;
+		outline: none;
+		padding: 8px;
+		box-sizing: border-box;
+		transition: 0.3s;
+	}
 
-		.inputWithIcon {
-			position: relative;
-		}
+	input[type="text"]:focus,
+	input[type="password"]:focus {
+		border-color: dodgerBlue;
+		box-shadow: 0 0 8px 0 dodgerBlue;
+	}
 
-		.inputWithIcon i {
-			position: absolute;
-			left: 10px;
-			top: 8px;
-			padding: 9px 8px;
-			color: #aaa;
-			transition: 0.3s;
-		}
+	.inputWithIcon input[type="text"],
+	.inputWithIcon input[type="password"] {
+		padding-left: 40px;
+		transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+		/* Add transition for smoothness */
+	}
 
-		.inputWithIcon input[type="text"],
-		[type="password"]:focus+i {
-			color: dodgerBlue;
-		}
+	.inputWithIcon {
+		position: relative;
+	}
 
-		/* .container {
-            width: 350px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }     */
-		.checkbox {
-			margin: 10px 0;
-		}
+	input[type="submit"] {
+		width: 100%;
+		padding: 10px;
+		background-color: #007bff;
+		color: white;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
 
-		input[type="submit"] {
-			width: 100%;
-			padding: 10px;
-			background-color: #007bff;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-		}
-	</style>
+	.inputWithIcon i {
+		position: absolute;
+		left: 10;
+		top: 8px;
+		padding: 9px 8px;
+		color: #aaa;
+		transition: 0.3s;
+	}
+
+	.inputWithIcon input[type="text"]:focus+i,
+	.inputWithIcon input[type="password"]:focus+i {
+		color: dodgerBlue;
+	}
+</style>
 </head>
 
 <body>
@@ -138,7 +155,8 @@
 			</div>
 			<input type="submit" value="Register Now"><br><br>
 			<p align="center"><small>Already have an account?</small><a
-					href="https://8000-mukeshtiwar-billingsyst-2q2bomt2cp4.ws-us108.gitpod.io/login/">Login Now</a>.</p>
+					href="https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/accounts/login/">Login
+					Now</a>.</p>
 		</form>
 	</div>
 
