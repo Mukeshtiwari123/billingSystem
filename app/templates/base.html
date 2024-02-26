@@ -13,6 +13,84 @@
         padding: 0;
         height: 100%;
     }
+    /* Base styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Welcome section styling */
+.welcome-section {
+    background-color: #005A9C; /* Deep blue background */
+    color: #ffffff; /* White text color */
+    padding: 50px 20px; /* Padding around the text */
+    text-align: center; /* Centering the text */
+}
+
+/* General styling for other sections */
+.section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Styling for feature blocks */
+.feature {
+    background-color: #f4f4f4; /* Light grey background */
+    border: 1px solid #ddd; /* Slight border */
+    padding: 20px;
+    margin: 20px 0;
+}
+
+/* Button styling */
+.btn {
+    background-color: #007BFF; /* Bootstrap primary blue */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 10px 0;
+}
+/* css for the section get-started */
+/* Get Started Section Styling */
+.section.get-started {
+    background-color: #ffffff; /* White background for contrast */
+    margin: 40px auto; /* Center the section with some margin */
+    max-width: 800px; /* Max width to keep content readable */
+    padding: 50px; /* Padding for spacing inside the section */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+    border-radius: 8px; /* Rounded corners for a modern look */
+    text-align: center; /* Center-align the content */
+}
+
+.section.get-started h2 {
+    color: #333; /* Dark text for the heading */
+    margin-bottom: 30px; /* Space below the heading */
+}
+
+.section.get-started p {
+    color: #666; /* Slightly lighter text for the description */
+    margin-bottom: 40px; /* Space above the buttons */
+    font-size: 18px; /* Slightly larger font size for readability */
+}
+
+/* Enhancing the button styling from the previous CSS */
+.btn {
+    background-color: #007BFF; /* Consistent blue color for primary action */
+    color: white;
+    padding: 12px 25px; /* Larger padding for a bigger button */
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade on hover for interaction feedback */
+}
+
 
     /* header,
     footer {
@@ -20,49 +98,6 @@
         padding: 1em;
         background-color: #f0f0f0;
     } */
-
-    .welcome-section {
-        height: 50vh;
-        /* Half the height of the viewport */
-        background-color: #f9f9f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        box-shadow: 0 10px 12px -10px black;
-        /* Shadow effect */
-    }
-
-    .welcome-section h1 {
-        font-size: 2em;
-        position: relative;
-        z-index: 1;
-    }
-
-
-    .btn {
-        display: inline-block;
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-        color: #fff;
-    }
-
-    .btn-primary:active {
-        background-color: #004085;
-        color: #ccc;
-    }
 
     header {
         background-color: #333;
@@ -104,24 +139,10 @@
         clear: both;
     }
 
-    /* style the bills page */
-    nav ul li a.active,
-    nav ul li a:hover {
-        background-color: #555;
-        /* Darker shade indicates active/hover state */
-        color: white;
-    }
-
     /* Style for main content (optional) */
     main {
         padding: 20px;
     }
-
-    /* background_color of the heading on hover and text Color of the heading */
-    /* nav a:hover {
-        background-color: #f80707; 
-        color: rgb(118, 248, 11);
-    } */
 
     /* Social links styling */
     .social-links {
@@ -148,90 +169,449 @@
         /* Change icon color on hover */
     }
 
-    .footer {
-        position: absolute;
-        bottom: 0 20;
-        width: 100%;
-        padding: 12em 0;
-        background-color: #333;
-        /* Dark background for the footer */
-        color: #fff;
-        /* White text color */
-        padding: 20px 0;
-        /* Padding around the footer content */
-        text-align: center;
-        /* Center-align the content */
-        flex-shrink: 0;
-        /* Prevents the footer from shrinking */
-        /* Your footer styling */
-        /* padding: 20px; */
-        /* background-color: #ddd; */
-    }
-        /* Styling of marquee tag */
-        .marq { 
-            padding-top: 30px; 
-            padding-bottom: 30px; 
-        } 
-        .c1 { 
-            font-size: 36px; 
-            font-weight: bold; 
-            color: white; 
-            padding-bottom: 10px; 
-        } 
 
-    
+
+    /* Styling of marquee tag */
+    .marq {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .c1 {
+        font-size: 36px;
+        font-weight: bold;
+        color: white;
+        padding-bottom: 10px;
+    }
+
+    /* adding the CSS to style the Charges Page  */
+
+    body {
+        /* font-family: 'Arial', sans-serif; */
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Layout for the charges page */
+    ul {
+        list-style: none;
+        padding: 10px;
+    }
+
+    ul li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    ul li a {
+        margin-right: 10px;
+        color: #333;
+    }
+
+    h2 {
+        color: #333;
+        text-align: center;
+    }
+
+    /* Button styling */
+    a[href*="charge_create"] {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    a[href*="charge_create"]:hover {
+        background-color: #218838;
+    }
+
+    /* Edit and Delete link styling */
+    a[href*="charge_update"],
+    a[href*="charge_delete"] {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    a[href*="charge_update"]:hover {
+        background-color: #ffc107;
+    }
+
+    a[href*="charge_delete"]:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    /* adding the CSS to style the Bills Page  */
+    /* Bills page specific styles */
+    .bills-page h2 {
+        color: #333;
+    }
+
+    .bills-page a[href*="bill_create"] {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        text-decoration: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .bills-page a[href*="bill_create"]:hover {
+        background-color: #0056b3;
+    }
+
+    .bills-page ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .bills-page ul li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .bills-page ul li a {
+        margin-right: 10px;
+        color: #333;
+        text-decoration: none;
+    }
+
+    .bills-page .bill {
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .bills-page a {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .bills-page a:hover {
+        background-color: #218838;
+    }
+
+
+    .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    .bills-page a[href*="bill_update"],
+    .bills-page a[href*="bill_delete"] {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    .bills-page a[href*="bill_update"]:hover {
+        background-color: #ffc107;
+    }
+
+    .bills-page a[href*="bill_delete"]:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    /* adding the CSS to style the Receipt Page  */
+
+    /* Receipts page specific styles */
+    .receipt-list a {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .receipt-list a:hover {
+        background-color: #0056b3;
+    }
+
+    .receipt-list ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .receipt-list ul li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .receipt-list ul li a {
+        margin-right: 10px;
+        color: #333;
+    }
+
+    .receipt-list ul li a:hover {
+        color: #0056b3;
+    }
+
+    /* Button specific to PDF generation */
+    .btn-primary {
+        background-color: #28a745;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    /* adding the CSS to style the Payment Mode Page  */
+    .payment-modes-page h2 {
+        color: #333;
+    }
+
+    .payment-modes-page a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .payment-modes-page a:hover {
+        text-decoration: underline;
+    }
+
+    .payment-modes-page ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .payment-modes-page ul li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        margin-bottom: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .payment-modes-page a[href*="payment_mode_create"] {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .payment-modes-page a[href*="payment_mode_create"]:hover {
+        background-color: #218838;
+    }
+
+    .payment-modes-page a[href*="payment_mode_update"],
+    .payment-modes-page a[href*="payment_mode_delete"] {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        color: #333;
+    }
+
+    .payment-modes-page a[href*="payment_mode_update"]:hover {
+        background-color: #ffc107;
+    }
+
+    .payment-modes-page a[href*="payment_mode_delete"]:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .footer .footer-content {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 20px;
+        text-align: left;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+    }
+
+    .footer-section h3 {
+        color: #fff;
+        margin-bottom: 15px;
+    }
+
+     .footer-section links{
+        color: #070707;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-section ul a:hover,
+    .footer-section a:hover {
+        text-decoration: underline;
+    }
+
+    .footer-bottom {
+        margin-top: 20px;
+        border-top: 1px solid #444;
+        padding-top: 10px;
+    }
+
+    .social-links a {
+        font-size: 24px;
+        margin: 0 10px;
+    }
+
+    @media (max-width: 768px) {
+        .footer .footer-content {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+
+    .page-content {
+        min-height: 100vh;
+        /* Adjust the viewport height so that it includes the footer */
+        padding-bottom: 120px;
+        /* Adjust based on your footer's height */
+    }
 </style>
 
 </head>
 
 <body>
-    <header>
-        <div class="header">
-            <h1> <marquee class="marq" bgcolor="Green" 
-                direction="left" loop=""scrollamount="20"> <div class="c1"><big><big>Welcome to <mark>Billing System</mark></big></big></div></marquee></h1>
-        </div>
-    </header>
-    <nav>
-        <!-- Links to different modules -->
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'charge_list' %}">Charges</a>
-        <a href="{% url 'bill_list' %}" class="active">Bills</a>
-        <a href="{% url 'receipt_list' %}">Receipts</a>
-        <a href="{% url 'payment_mode_list' %}">Payment Modes</a>
-        <!-- Other navigation links -->
-        {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        {% endif %}
-        <a href="{% url 'register' %}">Register</a>
-    </nav>
+    <div class="page-content">
+        <header>
+            <div class="header">
+                <h1>
+                    <marquee class="marq" bgcolor="Green" direction="left" loop="" scrollamount="30">
+                        <div class="c1"><big><big>Welcome to <mark>Billing System</mark></big></big></div>
+                    </marquee>
+                </h1>
+            </div>
+        </header>
+        <nav>
+            <!-- Links to different modules -->
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'charge_list' %}">Charges</a>
+            <a href="{% url 'bill_list' %}" class="active">Bills</a>
+            <a href="{% url 'receipt_list' %}">Receipts</a>
+            <a href="{% url 'payment_mode_list' %}">Payment Modes</a>
+            <!-- Other navigation links -->
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+            <a href="{% url 'register' %}">Register</a>
+        </nav>
 
-    {% block content %}
-    {% endblock %}
-
-    <div class="footer">
-
-        <div class="social-links">
-            <!-- WhatsApp -->
-            <a href="https://wa.me/yourphonenumber" target="_blank" title="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook">
-                <i class="fab fa-facebook"></i>
-            </a>
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <!-- Placeholder for "X" social media -->
-            <a href="https://www.x-accounts.com/login" target="_blank" title="X">
-                <i class="fab fa-x"></i> <!-- Replace "fa-example" with the correct class for your "X" social media -->
-            </a>
-        </div>
-
+        {% block content %}
+        {% endblock %}
     </div>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section contact-form">
+                <h3>Contact Us</h3>
+                <p>Email: mukeshtiwari142005@gmail.com</p>
+                <p>Phone: 95452 35942</p>
+                <p>Address: G/01 Main St, Mumbai, India</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/">Home</a></li>
+                    <li><a
+                            href="https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/charges/">Charges</a>
+                    </li>
+                    <li><a href="https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/bills/">Bills</a>
+                    </li>
+                    <li><a href="https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/receipts/">Receipts</a>
+                    </li>
+                    <li><a
+                            href="https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/payment_mode/">Payment_Mode</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-section social-links">
+                <h3>Follow Us</h3>
+                <a href="https://www.facebook.com/yourprofile" target="_blank" title="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.twitter.com/yourusername" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/yourusername" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.youtube.com/yourchannel" target="_blank" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <!-- Add more social links as needed -->
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; example.com | Designed by Mukesh
+        </div>
+    </div>
+
 </body>
 
 </html>

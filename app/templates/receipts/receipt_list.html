@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Receipts</h2>
-<a href="{% url 'receipt_create' %}">Add New Receipt</a>
-<ul>
+<div class="receipt-list">
+  <h2>Receipts</h2>
+  <a href="{% url 'receipt_create' %}">Add New Receipt</a>
+  <ul>
+    {% for receipt in receipts %}
+    <li>
+      {{ receipt.receipt_number }} - {{ receipt.receipt_type }}
+      <a href="{% url 'receipt_update' receipt.pk %}">Edit</a> |
+      <a href="{% url 'receipt_delete' receipt.pk %}">Delete</a>
+    </li>
+    {% endfor %}
+  </ul>
   {% for receipt in receipts %}
-  <li>
-    {{ receipt.receipt_number }} - {{ receipt.receipt_type }}
-    <a href="{% url 'receipt_update' receipt.pk %}">Edit</a> |
-    <a href="{% url 'receipt_delete' receipt.pk %}">Delete</a>
-  </li>
+  <div class="receipt">
+    <!-- Display bill details -->
+    <a href="{% url 'receipt_pdf' pk=receipt.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
+  </div>
   {% endfor %}
-</ul>
-{% for receipt in receipts %}
-<div class="receipt">
-  <!-- Display bill details -->
-  <a href="{% url 'receipt_pdf' pk=receipt.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
 </div>
-{% endfor %}
 {% endblock %}

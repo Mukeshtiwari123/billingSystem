@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="bills-page">
   <h2>Bills</h2>
   <a href="{% url 'bill_create' %}">Add New Bill</a>
   <ul>
     {% for bill in bills %}
-      <li>
-        {{ bill.bil_number }} - {{ bill.bil_customer }}
-        <a href="{% url 'bill_update' bill.pk %}">Edit</a> |
-        <a href="{% url 'bill_delete' bill.pk %}">Delete</a>
-      </li>
+    <li>
+      {{ bill.bil_number }} - {{ bill.bil_customer }}
+      <a href="{% url 'bill_update' bill.pk %}">Edit</a> |
+      <a href="{% url 'bill_delete' bill.pk %}">Delete</a>
+    </li>
     {% endfor %}
   </ul>
   {% for bill in bills %}
-    <div class="bill">
-        <!-- Display bill details -->
-        <a href="{% url 'bill_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
-    </div>
-{% endfor %}
+  <div class="bill">
+    <!-- Display bill details -->
+    <a href="{% url 'bill_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
+  </div>
+  {% endfor %}
 
-
-
+</div>
 
 {% endblock %}

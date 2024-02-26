@@ -4,4 +4,22 @@
 <div class="welcome-section">
     <h1>Welcome to My Billing System</h1>
 </div>
+<div class="section features">
+    <h2>Features</h2>
+    <div class="feature">Generate Bills Quickly</div>
+    <div class="feature">Manage Accounts Efficiently</div>
+    <div class="feature">Access Historical Billing Data</div>
+    <div class="feature">Automated Calculations</div>
+</div>
+<div class="section about">
+    <h2>About Our Billing System</h2>
+    <p>Our billing system offers a comprehensive solution for managing your billing needs with ease and efficiency. Designed for businesses of all sizes, it simplifies the billing process, saving you time and money.</p>
+</div>
+<div class="section get-started">
+    <h2>Get Started</h2>
+    <p>To start generating your bills today, sign up for an account or log in to access your dashboard.</p>
+    <a href="{% url 'register' %}" class="btn">Sign Up</a>
+    <a href="{% url 'login' %}" class="btn">Login</a>
+</div>
+
 {% endblock %}

@@ -10,7 +10,7 @@
 
 <style>
 	@import url(https://fonts.googleapis.com/css?family=Lato:400,700,900,300);
-	@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+	@import url(https://weloveiconfonts.com/api/?family=fontawesome);
 
 	* {
 		box-sizing: border-box;
@@ -131,7 +131,8 @@
 <body>
 	<div class="container">
 		<h2><u>Re</u>gistration</h2>
-		<form>
+		<form method="post" action="{% url 'register' %}">
+			{% csrf_token %}
 			<div class="inputWithIcon">
 				<input type="text" placeholder="Enter your name" required>
 				<i class="fa fa-user fa-lg fa-fw" aria-hidden="true"> </i>

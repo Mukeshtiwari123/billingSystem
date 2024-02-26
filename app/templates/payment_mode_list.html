@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Payment Modes</h2>
-<a href="{% url 'payment_mode_create' %}">Add New Payment Mode</a>
-<ul>
-  {% for mode in payment_modes %}
-  <li>
-    {{ mode.payment_mode_name }} - {{ mode.payment_mode_type_string }}
-    <a href="{% url 'payment_mode_update' mode.pk %}">Edit</a> |
-    <a href="{% url 'payment_mode_delete' mode.pk %}">Delete</a>
-  </li>
-  {% endfor %}
-</ul>
+<div class="payment-modes-page">
+    <h2>Payment Modes</h2>
+    <a href="{% url 'payment_mode_create' %}">Add New Payment Mode</a>
+    <ul>
+    {% for mode in payment_modes %}
+        <li>
+        {{ mode.payment_mode_name }} - {{ mode.payment_mode_type_string }}
+        <a href="{% url 'payment_mode_update' mode.pk %}">Edit</a> |
+        <a href="{% url 'payment_mode_delete' mode.pk %}">Delete</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
 {% endblock %}
