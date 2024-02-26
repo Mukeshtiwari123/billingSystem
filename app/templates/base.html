@@ -459,7 +459,76 @@ body {
         background-color: #dc3545;
         color: white;
     }
+/* end of the styling of Payment_mode page */
+/* styling of the bill generation form */
+/* Form Styling */
+.form-bill {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.form-bill h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-bill label {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+}
+
+.form-bill input[type="text"],
+.form-bill input[type="date"],
+.form-bill input[type="number"],
+.form-bill select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Makes sure padding doesn't affect the total width */
+}
+
+.form-bill input[type="submit"] {
+    width: auto;
+    padding: 10px 30px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-bill input[type="submit"]:hover {
+    background-color: #007bff;
+}
+
+.form-bill .form-group {
+    margin-bottom: 15px;
+}
+
+.form-bill .error {
+    color: #ff0000;
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+
+/* Enhancements for accessibility */
+.form-bill input[type="text"]:focus,
+.form-bill input[type="date"]:focus,
+.form-bill input[type="number"]:focus,
+.form-bill select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+/* end to styling the bill generation form  */
     .footer {
         position: relative;
         bottom: 0;
