@@ -353,7 +353,7 @@ def payment_mode_delete(request, pk):
 # for  bills pdf  generations
 from django.http import HttpResponse
 from .models import Bills, Receipt
-from .utils import render_to_pdf
+from .utils import render_to_pdf, send_email_with_pdf_attachment
 
 def bill_pdf_view(request, pk):
     try:
@@ -370,6 +370,24 @@ def receipt_pdf_view(request, pk):
         return render_to_pdf('receipts/pdf_template.html', context)
     except Receipt.DoesNotExist:
         return HttpResponse("Receipt not found.", status=404)
+    
+def email_pdf(request, pk):
+    try:
+        base_url = f"{request.scheme}://{request.get_host()}"
+        print(base_url)
+        subject = 'Email with Attachment'
+        message = 'Please find the attached file.'
+        from_email = 'muk142005@gmail.com'  # Replace with your email address
+        recipient_list = ['shaikhhaseeb301@gmail.com']  # Replace with the recipient's email address
+        pdf_url = f"{base_url}/bill/{pk}/pdf/"
+        print(pdf_url)
+       
+
+        send_email_with_pdf_attachment(subject, message, from_email, recipient_list, pdf_url)
+        context = [subject, message, from_email, recipient_list, pdf_url]
+        return render_to_pdf('bills/email_succes_template.html', context)
+    except Bills.DoesNotExist:
+        return HttpResponse("Error found in email.", status=404)
 
 
 

@@ -85,7 +85,8 @@ urlpatterns = [
     path('bills/<int:pk>/pdf/', bill_pdf_view, name='bill_pdf'),
     path('receipts/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
     path('bill/<int:pk>/pdf/', bill_pdf_view, name='bill_pdf'),
-     path('receipt/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
+    path('receipt/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
+    path('email/<int:pk>/pdf/', views.email_pdf, name='email_pdf'),
 
 ]
 

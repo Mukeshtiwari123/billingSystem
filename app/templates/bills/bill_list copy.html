@@ -10,12 +10,15 @@
       {{ bill.bil_number }} - {{ bill.bil_customer }}
       <a href="{% url 'bill_update' bill.pk %}">Edit</a> |
       <a href="{% url 'bill_delete' bill.pk %}">Delete</a>
-      <a href="{% url 'bill_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
-      <a href="{% url 'email_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Email PDF</a>
     </li>
     {% endfor %}
   </ul>
-
+  {% for bill in bills %}
+  <div class="bill">
+    <!-- Display bill details -->
+    <a href="{% url 'bill_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
+  </div>
+  {% endfor %}
 
 </div>
 
