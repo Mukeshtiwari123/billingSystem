@@ -12,6 +12,8 @@
       <a href="{% url 'bill_delete' bill.pk %}">Delete</a>
       <a href="{% url 'bill_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
       <a href="{% url 'email_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Email PDF</a>
+
+
     </li>
     {% endfor %}
   </ul>

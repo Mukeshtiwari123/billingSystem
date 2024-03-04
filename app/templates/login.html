@@ -50,11 +50,6 @@
         /* Apply the fade-in animation */
     }
 
-    /* .login-container form {
-    margin-bottom: 20px;
-} */
-
-
 
     input[type="text"],
     input[type="password"] {
@@ -127,8 +122,46 @@
         color: dodgerBlue;
     }
 
+	.inputWithIcon {
+    position: relative;
+    display: flex;
+    align-items: left;
+}
+
+.inputWithIcon input {
+    padding-left: 50px; /* Adjust based on the size of your left icon */
+    padding-right: 50px; /* Adjust based on the size of your right icon */
+    width: 100%;
+}
+
+.icon-left, .icon-right {
+    position: absolute;
+}
+
+.icon-left {
+    left: 10px; /* Adjust based on preference */
+}
+
+.icon-right {
+    right: 10px; /* Adjust based on preference */
+}
+
     
 </style>
+<script>
+    //for the eye effect to hide and show the password
+	document.addEventListener('DOMContentLoaded', function() {
+     const togglePassword2 = document.querySelector('#togglePassword2');
+        const password2 = document.querySelector('#password2');
+        togglePassword2.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+            password2.setAttribute('type', type);
+            // toggle the eye / eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+    });
+        </script>
 </head>
 
 <body>
@@ -144,9 +177,10 @@
                 <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"> </i>
             </div>
             <div class="inputWithIcon">
-                <input type="password" name="password" placeholder="Confirm a password" required>
-                <i class="fa fa-key fa-lg fa-fw" aria-hidden="true"> </i>
-            </div>
+				<input type="password" name="password2" id="password2" placeholder="Confirm a password" required>
+				<i class="fa fa-key fa-lg fa-fw icon-left" aria-hidden="true"></i>
+				<i class="fa fa-eye icon-right" id="togglePassword2" style="cursor: pointer;"></i>
+			</div>
             <input type="checkbox" id="c"> <label for="c"><small>Remember me</small></label>
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
             <a href="forgot.html"><small> Forgot password?</small></a><br><br>

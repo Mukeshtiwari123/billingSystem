@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 
 from django.shortcuts import render, redirect, get_object_or_404
+
 from .models import Charges
 from .forms import ChargesForm
 
@@ -42,6 +43,10 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.forms import ModelForm
 from django import forms
+import re
+
+from django.core.exceptions import ValidationError
+
 
 class UserRegistrationForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -49,32 +54,74 @@ class UserRegistrationForm(ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password',)
+        fields = ('username', 'first_name', 'last_name', 'email', 'password','password2',)
 
     def clean_password2(self):
-        cd = self.cleaned_data
-        if cd['password'] != cd['password2']:
-            raise forms.ValidationError('Passwords don\'t match.')
-        return cd['password2']
+        password = self.cleaned_data.get('password')
+        if password:
+            # Check for at least one lowercase letter
+            if not re.search('[a-z]', password):
+                raise ValidationError('The password must contain at least one lowercase letter.')
+            # Check for at least one uppercase letter
+            if not re.search('[A-Z]', password):
+                raise ValidationError('The password must contain at least one uppercase letter.')
+            # Check for at least one special character
+            if not re.search('[^A-Za-z0-9]', password):
+                raise ValidationError('The password must contain at least one special character.')
+        # Ensure you also return the cleaned data
+        return password
 
 
+
+
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserRegistrationForm(request.POST)
+#         print("indrester")
+#         print(form.is_valid())
+#         print(UserRegistrationForm)
+#           # Print all key-value pairs from the POST data
+#         for key, value in request.POST.items():
+#             print(f"{key}: {value}")
+#         if form.is_valid():
+#             new_user = form.save(commit=False)
+#             new_user.set_password(form.cleaned_data['password'])
+#             new_user.save()
+#             # Authenticate and login are optional here, depending on whether you want to log the user in directly after registration
+#             user = authenticate(username=new_user.username, password=form.cleaned_data['password'])
+#             login(request, user)
+#             # Redirect to login page after successful registration
+#             return redirect('login')  # Use the name of your login route
+#     else:
+#         form = UserRegistrationForm()
+#     return render(request, 'register.html', {'form': form})
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+# from django.contrib import messages
+# from .forms import UserRegistrationForm  # Ensure you have the correct import path
 
 def register(request):
+    message = ""
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = UserRegistrationForm(request.POST)  # Instantiate form with POST data
         if form.is_valid():
-            new_user = form.save(commit=False)
-            new_user.set_password(form.cleaned_data['password'])
-            new_user.save()
-            # Authenticate and login are optional here, depending on whether you want to log the user in directly after registration
-            user = authenticate(username=new_user.username, password=form.cleaned_data['password'])
-            login(request, user)
-            # Redirect to login page after successful registration
-            return redirect('login')  # Use the name of your login route
+            # Process the form data, e.g., create a user
+            User.objects.create_user(
+                username=form.cleaned_data['username'],
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                password=form.cleaned_data['password']
+            )
+            message = 'Registration successful. You can now log in.'
+            # Redirect to a new URL, for example, the login page
+            return redirect('https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/accounts/login/')  # Change 'login_url_name' to your login view's URL name
     else:
-        form = UserRegistrationForm()
-    return render(request, 'register.html', {'form': form})
+        form = UserRegistrationForm()  # Instantiate an empty form for GET request
 
+    return render(request, 'register.html', {'form': form, 'message': message})
 
 
 
@@ -84,35 +131,23 @@ from django.contrib import messages
 from django.urls import reverse
 
 def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')  # Redirect to a home or dashboard page
+            # messages.success(request, "You are now logged in.")
+            return redirect("home")  # Redirect to a home or dashboard page
         else:
-            messages.error(request, 'Invalid username or password.')
-    return render(request, 'login.html')  # Path to your login template
+            messages.error(request, "Invalid username or password.")
+    return render(request, "login.html")  # Path to your login template
+
 
 def user_logout(request):
     logout(request)
-    return redirect('login')  # Redirect back to the login page
+    return redirect("login")  # Redirect back to the login page
 
-
-
-
-
-# # Create your views
-# from django.shortcuts import render  
-# from bills.forms import StudentForm  
-
-# def example_view(request):
-#     return render(request, 'example.html')
-
-# def index(request):  
-#     student = StudentForm()  
-#     return render(request,"index.html",{'form':student})
 
 
 @login_required
@@ -371,24 +406,45 @@ def receipt_pdf_view(request, pk):
     except Receipt.DoesNotExist:
         return HttpResponse("Receipt not found.", status=404)
     
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import Bills
+from .forms import EmailPDFForm
+from .utils import render_to_pdf  # Assuming this utility returns a PDF file as a HttpResponse
+# import logging
+
+# logger = logging.getLogger(__name__)
 def email_pdf(request, pk):
-    try:
-        base_url = f"{request.scheme}://{request.get_host()}"
-        print(base_url)
-        subject = 'Email with Attachment'
-        message = 'Please find the attached file.'
-        from_email = 'muk142005@gmail.com'  # Replace with your email address
-        recipient_list = ['shaikhhaseeb301@gmail.com']  # Replace with the recipient's email address
-        pdf_url = f"{base_url}/bill/{pk}/pdf/"
-        print(pdf_url)
-       
+    bill = get_object_or_404(Bills, pk=pk)
+    
+    # Generate the PDF content using your utility function.
+    # Assuming `render_to_pdf` returns an HttpResponse with PDF content.
+    response = bill_pdf_view(request, pk)
+    if not isinstance(response, HttpResponse) or response.status_code != 200:
+        return HttpResponse("Failed to generate PDF.", status=500)
 
-        send_email_with_pdf_attachment(subject, message, from_email, recipient_list, pdf_url)
-        context = [subject, message, from_email, recipient_list, pdf_url]
-        return render_to_pdf('bills/email_succes_template.html', context)
-    except Bills.DoesNotExist:
-        return HttpResponse("Error found in email.", status=404)
+    if request.method == 'POST':
+        form = EmailPDFForm(request.POST)
+        if form.is_valid():
+            # Read PDF content from the response
+            pdf_content = response.content
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            recipient_email = form.cleaned_data['recipient_list']  # assuming this field returns a single email string
+            
+            email = EmailMessage(subject, message, to=[recipient_email])
+            email.attach('bill.pdf', pdf_content, 'application/pdf')
+            # try:
+            #     email.send()
+            # except Exception as e:
+            #     # Log the error or take appropriate actions
+            #     logger.error(f"Failed to send email: {e}")
+            email.send()
 
-
-
-
+            
+            return redirect('https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/')  # Assuming you have a 'home' view to redirect to after email is sent
+    else:
+        form = EmailPDFForm()
+    
+    return render(request, 'bills/email_form.html', {'form': form, 'bill': bill},)

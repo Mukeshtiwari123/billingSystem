@@ -6,6 +6,9 @@ from weasyprint import HTML
 import os
 import requests
 from django.core.mail import EmailMessage
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 def render_to_pdf(template_src, context_dict={}):
     html_string = render_to_string(template_src, context_dict)
@@ -35,3 +38,8 @@ def send_email_with_pdf_attachment(subject, message, from_email, recipient_list,
     # Send the email
     email.send()
 
+# def send_email_to_client():
+#     subject=""
+#     message=""
+#     from_email=""
+#     recipient_list=

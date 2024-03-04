@@ -26,7 +26,7 @@ from bills import views
 from django.contrib.auth.views import LoginView, LogoutView
 
 # from . import views  # Adjust this import based on your project structure
-
+# from .views import email_pdf
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -86,7 +86,8 @@ urlpatterns = [
     path('receipts/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
     path('bill/<int:pk>/pdf/', bill_pdf_view, name='bill_pdf'),
     path('receipt/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
-    path('email/<int:pk>/pdf/', views.email_pdf, name='email_pdf'),
+    # path('email/<int:pk>/pdf/', views.email_pdf, name='email_pdf'),
+    path('email_pdf/<int:pk>/', views.email_pdf, name='email_pdf'),
 
 ]
 

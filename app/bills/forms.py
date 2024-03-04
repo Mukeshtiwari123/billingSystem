@@ -71,3 +71,10 @@ class PaymentModeForm(forms.ModelForm):
     class Meta:
         model = PaymentMode
         fields = ['payment_mode_name', 'payment_mode_type_string']
+
+# Form creation for getting the requirement for sending the email.
+
+class EmailPDFForm(forms.Form):
+    subject = forms.CharField(max_length=255)
+    message = forms.CharField(widget=forms.Textarea)
+    recipient_list = forms.EmailField(label="Recipient's Email")
