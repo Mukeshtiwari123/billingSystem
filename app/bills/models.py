@@ -225,18 +225,6 @@ class Bills(models.Model):
     def __str__(self):
         return f"{self.pk} - {self.bil_type} - {self.bil_number}"
 
-    def get_item_list_with_amounts(self):
-        item_list_with_amounts = []
-        for bill_item in self.billitem_set.all():
-            item_detail = {
-                'item_name': bill_item.item.item_name,
-                'quantity': bill_item.quantity,
-                'price_per_item': bill_item.price_per_item,
-                'total_amount': bill_item.quantity * bill_item.price_per_item
-            }
-            item_list_with_amounts.append(item_detail)
-        return item_list_with_amounts
-
 
 class BillCharge(models.Model):
     bill = models.ForeignKey(Bills, on_delete=models.CASCADE)

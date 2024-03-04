@@ -117,13 +117,6 @@
     }
 
 
-    /* header,
-    footer {
-        /* text-align: center; 
-        padding: 1em;
-        background-color: #f0f0f0;
-    } */
-
     header {
         background-color: #333;
         color: #fff;
@@ -210,81 +203,51 @@
     }
 
     /* adding the CSS to style the Charges Page  */
+    /* .charge-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+} */
 
-    body {
-        /* font-family: 'Arial', sans-serif; */
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        color: #333;
-    }
+.charge-page h2 {
+    color: #333;
+}
 
-    a {
-        color: #007bff;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    /* Layout for the charges page */
-    ul {
-        list-style: none;
-        padding: 10px;
-    }
-
-    ul li {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        margin-bottom: 5px;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    ul li a {
-        margin-right: 10px;
-        color: #333;
-    }
-
-    h2 {
-        color: #333;
-        text-align: center;
-    }
-
-    /* Button styling */
-    a[href*="charge_create"] {
-        display: inline-block;
-        background-color: #28a745;
+.charge-page a {
+    display: inline-block;
+        background-color: #007bff;
         color: white;
-        padding: 10px 15px;
+        padding: 10px 20px;
         border-radius: 5px;
         margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+        text-decoration: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    a[href*="charge_create"]:hover {
-        background-color: #218838;
-    }
+.charge-page a:hover {
+    text-decoration: underline;
+}
 
-    /* Edit and Delete link styling */
-    a[href*="charge_update"],
-    a[href*="charge_delete"] {
-        padding: 5px 10px;
-        border-radius: 5px;
-        background-color: #f0f0f0;
-        color: #333;
-    }
+.charge-page ul {
+    list-style-type: none;
+    padding: 0;
+}
 
-    a[href*="charge_update"]:hover {
-        background-color: #ffc107;
-    }
+.charge-page li {
+    background-color: #f8f9fa;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-    a[href*="charge_delete"]:hover {
-        background-color: #dc3545;
-        color: white;
-    }
+.charge-page li a {
+    margin: 0 10px;
+}
+
+/* Add more specific styles as needed */
+
 
     /* adding the CSS to style the Bills Page  */
     /* Bills page specific styles */
