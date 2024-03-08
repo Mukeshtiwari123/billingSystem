@@ -23,6 +23,7 @@ from .forms import ReceiptChargeForm
 from .models import PaymentMode
 from .forms import PaymentModeForm
 
+import json
 
 
 from django.http import HttpResponse
@@ -201,6 +202,35 @@ def bill_create(request):
     else:
         form = BillsForm()
     return render(request, 'bills/bill_form.html', {'form': form})
+
+# @login_required
+# # Create view
+# def bill_create(request, bill_id=None):
+#     bill = None
+#     if bill_id:
+#         bill = get_object_or_404(Bills, pk=bill_id)
+
+#     if request.method == 'POST':
+#         form = BillsForm(request.POST, instance=bill)
+#         items = [value for key, value in request.POST.items() if key.startswith('item_')]
+#         # You might want to validate items here
+#         if form.is_valid():
+#             bill = form.save(commit=False)
+#             bill.bil_items = json.dumps(items)  # Assuming items should be stored as a JSON list
+#             bill.save()
+#             return redirect('bill_list')  # Replace with your actual view name
+#     else:
+#         form = BillsForm(instance=bill)
+#         items = []
+
+#     if bill and bill.bil_items:
+#         items = json.loads(bill.bil_items)
+
+#     return render(request, 'bills/bill_form.html', {
+#         'form': form,
+#         'items': items,  # Pass items to the template to prepopulate if editing
+#     })
+
 @login_required
 # Read/List view
 def bill_list(request):

@@ -188,11 +188,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 class Charges(models.Model):
     charge_title = models.CharField(max_length=255)
-    charge_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
-    charge_fixed_rate = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    charge_percentage = models.DecimalField(max_digits=100000, decimal_places=2, default=1)
+    charge_fixed_rate = models.DecimalField(max_digits=100000, decimal_places=2, default=1)
 
     def __str__(self):
         return self.charge_title
@@ -220,10 +222,52 @@ class Bills(models.Model):
     bil_number = models.CharField(max_length=255)
     bil_receipt_date = models.DateField()
     bil_charges = models.ManyToManyField('Charges', through='BillCharge')
-    bil_items = models.ManyToManyField('Item', through='BillItem')
-
+    # bil_items = models.ManyToManyField('Item', through='BillItem')
+    bil_items = models.TextField()  # Assuming this stores JSON data
+    
     def __str__(self):
         return f"{self.pk} - {self.bil_type} - {self.bil_number}"
+
+    def set_items(self, items_list):
+        """
+        Stores a list of items (dicts) as a JSON string in bil_items.
+        """
+        self.bil_items = json.dumps(items_list, cls=DjangoJSONEncoder)
+
+    def get_items(self):
+        """
+        Retrieves the list of items stored in bil_items.
+        """
+        if self.bil_items:
+            return json.loads(self.bil_items)
+        return []
+    
+        def calculate_total_with_charges(self):
+        """
+        Calculates the total amount for the bill, including all charges and GST at 18%.
+        """
+        # Load the item costs from bil_items JSON field
+        items = self.get_items()
+        total_item_cost = sum(item['total_cost'] for item in items)
+        
+        # Calculate charges from BillCharge
+        # Assuming BillCharge.amount for 'fixed' is an absolute value and for 'percentage' is a percent of total_item_cost
+        charges = self.billcharge_set.aggregate(
+            total_charges=Sum(
+                Case(
+                    When(charge_type='fixed', then='amount'),
+                    When(charge_type='percentage', then=F('amount') / 100 * total_item_cost),
+                    output_field=DecimalField()
+                )
+            )
+        )['total_charges'] or 0
+        
+        # Calculate total including charges
+        total_with_charges = total_item_cost + charges
+        
+        return total_with_charges
+
+
 
 
 class BillCharge(models.Model):
