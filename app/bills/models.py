@@ -242,7 +242,7 @@ class Bills(models.Model):
             return json.loads(self.bil_items)
         return []
     
-        def calculate_total_with_charges(self):
+    def calculate_total_with_charges(self):
         """
         Calculates the total amount for the bill, including all charges and GST at 18%.
         """
