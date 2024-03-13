@@ -108,6 +108,11 @@ def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)  # Instantiate form with POST data
         if form.is_valid():
+            print(  form.cleaned_data['username'],
+                    form.cleaned_data['first_name'],
+                    form.cleaned_data['last_name'],
+                    form.cleaned_data['email'],
+                    form.cleaned_data['password'])
             # Process the form data, e.g., create a user
             User.objects.create_user(
                 username=form.cleaned_data['username'],
@@ -118,7 +123,10 @@ def register(request):
             )
             message = 'Registration successful. You can now log in.'
             # Redirect to a new URL, for example, the login page
-            return redirect('https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/accounts/login/')  # Change 'login_url_name' to your login view's URL name
+            return redirect('/bills')  # Change 'login_url_name' to your login view's URL name
+        else:
+            message = "Invalid username or password." 
+            messages.error(request, "Invalid username or password.")
     else:
         form = UserRegistrationForm()  # Instantiate an empty form for GET request
 
@@ -132,17 +140,21 @@ from django.contrib import messages
 from django.urls import reverse
 
 def user_login(request):
+    message = ""
     if request.method == "POST":
         username = request.POST.get("username")
-        password = request.POST.get("password")
+        password = request.POST.get("password2")
+        print(username,password)
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             # messages.success(request, "You are now logged in.")
-            return redirect("home")  # Redirect to a home or dashboard page
+            return redirect("/bills")  # Redirect to a home or dashboard page
         else:
+            message = "Invalid username or password." 
             messages.error(request, "Invalid username or password.")
-    return render(request, "login.html")  # Path to your login template
+            
+    return render(request, "login.html", {'message': message})  # Path to your login template
 
 
 def user_logout(request):
@@ -473,7 +485,7 @@ def email_pdf(request, pk):
             email.send()
 
             
-            return redirect('https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us108.gitpod.io/')  # Assuming you have a 'home' view to redirect to after email is sent
+            return redirect('/')  # Assuming you have a 'home' view to redirect to after email is sent
     else:
         form = EmailPDFForm()
     

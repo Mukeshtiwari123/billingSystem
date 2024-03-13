@@ -105,6 +105,43 @@
         updateItemsField();
     }
 
+    // function renderItems() {
+    //     const container = document.getElementById('items-container');
+    //     container.innerHTML = '';
+    //     let subtotal = 0;
+
+    //     items.forEach((item, index) => {
+    //         container.innerHTML += `<div>
+    //         Item: <input type="text" onchange="updateItem(${index}, 'item', this.value)" value="${item.item}">
+    //         Quantity: <input type="number" onchange="updateItem(${index}, 'quantity', parseInt(this.value))" value="${item.quantity}">
+    //         Cost per item: <input type="number" onchange="updateItem(${index}, 'cost_for_single_item', parseFloat(this.value))" value="${item.cost_for_single_item}">
+    //         Total cost: <input type="number" value="${item.total_cost}" readonly>
+    //         <button type="button" onclick="removeItem(${index})">Remove</button>
+    //     </div>`;
+    //         subtotal += item.total_cost;
+    //     });
+
+    //     let totalCharges = 0;
+    //     charges.forEach(charge => {
+    //         let chargeAmount = 0;
+    //         if (charge.type === 'fixed') {
+    //             chargeAmount = charge.amount;
+    //         } else if (charge.type === 'percentage') {
+    //             chargeAmount = (subtotal * charge.amount) / 100;
+    //         }
+    //         totalCharges += chargeAmount;
+    //     });
+
+    //     let totalWithCharges = subtotal + totalCharges;
+
+    //     container.innerHTML += `<div>Subtotal: ${subtotal.toFixed(2)}</div>`;
+    //     container.innerHTML += `<div>Total Charges: ${totalCharges.toFixed(2)}</div>`;
+    //     container.innerHTML += `<div>Total Including Charges: ${totalWithCharges.toFixed(2)}</div>`;
+
+    //     updateItemsField();
+    // }
+
+
     function updateItemsField() {
         console.log("textarea stringify ===> ", JSON.stringify(items))
         document.getElementById('bil_items_json').value = JSON.stringify(items);
@@ -113,20 +150,18 @@
 
     // Function to initialize the form with existing items data
     function initializeItems() {
-        const existingItemsJson = document.getElementById('bil_items_json').value;
-        console.log("textarea value ===> ", JSON.stringify(eval(existingItemsJson)))
-        if (existingItemsJson) {
-            items = JSON.parse(JSON.stringify(eval(existingItemsJson)));
+        const existingItemsJson = JSON.stringify(eval(document.getElementById('bil_items_json').value));
+        console.log("textarea value ===> ", existingItemsJson)
+        if (existingItemsJson && existingItemsJson !== "null") {
+            console.log("t in extarea value ===> ", existingItemsJson === "null",typeof(existingItemsJson))
+            items = JSON.parse(existingItemsJson);
             renderItems();
         }
     }
 
     // Call initializeItems on page load
     document.addEventListener('DOMContentLoaded', initializeItems);
-    // setTimeout(() => {
-    //     const existingItemsJson = document.getElementById('bil_items_json').value;
-    //     console.log("textarea value ===> ", existingItemsJson)
-    // }, 3000);
+
 </script>
 
 
