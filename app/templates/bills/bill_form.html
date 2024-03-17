@@ -6,6 +6,12 @@
     <form method="post" id="billForm">
         {% csrf_token %}
         {{ form.as_p }}
+        <div id="bil_remark">
+            <p><b>Note:</b> 
+                Bil items, Bil total with charges are readonly fields.
+                Total Changes will reflect on submit.
+            </p>
+        </div>
         <div id="items-container">
             <!-- Item fields will go here -->
         </div>

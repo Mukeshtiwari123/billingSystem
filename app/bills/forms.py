@@ -35,7 +35,7 @@ class StudentForm(forms.Form):
 class ChargesForm(forms.ModelForm):
     class Meta:
         model = Charges
-        fields = ['charge_title', 'charge_percentage', 'charge_fixed_rate']
+        fields = ['charge_title', 'charge_percentage', 'charge_fixed_rate','charge_type']
 
 
 # To handle CRUD operations for the Bills model, similar steps to those for the Charges model are followed. 
@@ -54,11 +54,16 @@ class BillsForm(ModelForm):
 
     class Meta:
         model = Bills
-        fields = ['bil_customer', 'bil_type', 'bil_description', 'bil_number', 'bil_receipt_date', 'bil_charges', 'bil_items']
+        fields = ['bil_customer', 'bil_type', 'bil_description', 'bil_number', 'bil_receipt_date', 'bil_charges', 'bil_items','bil_total_with_charges']
         widgets = {
                 'bil_receipt_date': forms.DateInput(attrs={'type': 'date'}),
             }
-
+        
+    def __init__(self, *args, **kwargs):
+        super(BillsForm, self).__init__(*args, **kwargs)
+        # Make read-only
+        self.fields['bil_items'].widget.attrs['readonly'] = True
+        self.fields['bil_total_with_charges'].disabled = True
 
 
 
