@@ -164,11 +164,13 @@ EMAIL_HOST_PASSWORD = 'jsrbooztjqulcfnt'  # Replace with your email password
 
 # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your_email@example.com'  # Replace with your email address
-EMAIL_HOST_PASSWORD = 'your_email_password'  # Replace with your email password
+EMAIL_HOST = 'mail.ikshvakusolutions.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = 'EGNW332V3W.dummy.testing.purpose.only@ikshvakusolutions.com'  # Replace with your email address
+EMAIL_HOST_PASSWORD = 'BkJ6rCG#Ge-v'  # Replace with your email password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # from django.core.mail import send_mail
 # from django.conf import settings
 # send_mail(subject='Add an eye-catching subject',message='Write an amazing message',from_email=settings.EMAIL_HOST_USER,recipient_list=['dojov15163@comsb.com'])
