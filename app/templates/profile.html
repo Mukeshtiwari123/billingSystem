@@ -29,6 +29,8 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
 
         }
 
@@ -82,7 +84,7 @@
         </div>
         <form class="profile-form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <img class="profile-image" src="{{user_profile.image.url}}" alt="Profile Image">
+            <center><img class="profile-image" src="{{user_profile.image.url}}" alt="Profile Image"></center>
             <div>
                 <input type="file" name="dp" class="dp" id="dp">
             </div>
