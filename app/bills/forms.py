@@ -106,3 +106,9 @@ class EmailPDFForm(forms.Form):
     subject = forms.CharField(max_length=255)
     message = forms.CharField(widget=forms.Textarea)
     recipient_list = forms.EmailField(label="Recipient's Email")
+
+
+
+# form for the forgot password page
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField()

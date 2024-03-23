@@ -490,3 +490,95 @@ def email_pdf(request, pk):
         form = EmailPDFForm()
     
     return render(request, 'bills/email_form.html', {'form': form, 'bill': bill},)
+
+
+
+
+def forgot_password_view(request):
+    # If form is submitted
+    if request.method == 'POST':
+        # Process the form: verify email, send reset password link, etc.
+        # Redirect to a new page or render the same page with a success message
+        return redirect('success_page')
+    else:
+        # If GET request, show the form
+        return render(request, 'forgot_password.html')
+
+# All the code for send the email to user with reset password link
+# Inside views.py of your Django app
+
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+
+def forgot_password_request(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = User.objects.filter(email=email).first()
+        if user:
+            # Generate password reset token
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk)).decode()
+            # Construct the email content
+            current_site = get_current_site(request)
+            mail_subject = 'Password Reset'
+            message = render_to_string('emails/password_reset_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'site_name': 'YourSiteName',
+                'protocol': 'http',
+                'path': f'/reset-password/{uid}/{token}/',
+            })
+            # Send the email
+            send_mail(mail_subject, message, 'from@example.com', [email], fail_silently=False, html_message=message)
+            # Redirect or respond indicating the email has been sent
+            return redirect('email_sent_page')
+    else:
+        # Your form handling for GET requests here
+        pass
+    return render(request, 'forgot_password_form.html')
+
+
+
+
+
+def success_page(request):
+    # Your logic here
+    return render(request, 'success_page.html')
+
+
+# user profile page 
+
+
+from .models import Profile
+from django.shortcuts import render
+from .models import Profile
+from django.contrib.auth.models import User
+
+def profile(request):
+    user_profile=Profile.objects.get(user=request.user)
+    user_model=User.objects.get(username=request.user)
+    if request.method=='POST':
+        print("abc")    
+        first_name=request.POST['first_name']
+        last_name=request.POST['last_name']
+        email=request.POST['email']
+        if request.FILES.get('dp')==None:
+            dp=user_profile.image
+        else:
+            dp=request.FILES.get('dp')
+        user_profile.image=dp
+        user_model.first_name=first_name
+        user_model.last_name=last_name
+        user_model.email=email
+
+    user_model.save()
+    user_profile.save()
+
+    
+    return render(request,'profile.html',{'user_profile':user_profile,'user_model':user_model})

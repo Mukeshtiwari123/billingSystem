@@ -137,6 +137,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+staticfiles_DIR=(os.path.join(BASE_DIR,'static'),)
+
+MEDIA_URL="/media/"
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -158,11 +162,10 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'muk142005@gmail.com'  # Replace with your email address
 EMAIL_HOST_PASSWORD = 'jsrbooztjqulcfnt'  # Replace with your email password
 #jsrb oozt jqul cfnt
-# settings.py
 
-# ... other settings ...
 
-# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.ikshvakusolutions.com'
 EMAIL_PORT = 465
@@ -171,6 +174,3 @@ EMAIL_USE_TLS = False
 EMAIL_HOST_USER = 'EGNW332V3W.dummy.testing.purpose.only@ikshvakusolutions.com'  # Replace with your email address
 EMAIL_HOST_PASSWORD = 'BkJ6rCG#Ge-v'  # Replace with your email password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-# from django.core.mail import send_mail
-# from django.conf import settings
-# send_mail(subject='Add an eye-catching subject',message='Write an amazing message',from_email=settings.EMAIL_HOST_USER,recipient_list=['dojov15163@comsb.com'])

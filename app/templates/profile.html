@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<html>
+
+<head>
+    {% load static %}
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .profile-header {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+
+        }
+
+        .profile-form {
+            display: grid;
+            gap: 10px;
+
+        }
+
+        .profile-form label {
+            font-weight: bold;
+        }
+
+        .profile-form input[type="text"],
+        .profile-form input[type="number"] {
+
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+        }
+
+        .profile-form input[type="submit"] {
+
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+
+        }
+
+        .profile-form input[type="submit"]:hover {
+
+            background-color: #0056b3;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <h1>User Profile</h1>
+            <!-- <img class="profile-image" src="{% static 'images/user.png' %}" alt="Profile Image"> -->
+        </div>
+        <form class="profile-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <img class="profile-image" src="{{user_profile.image.url}}" alt="Profile Image">
+            <div>
+                <input type="file" name="dp" class="dp" id="dp">
+            </div>
+            <div>
+                <label for="username">Username:
+                </label>
+                <input type="text" value="{{user_model.username}}" id="username" name="username" readonly>
+            </div>
+            <div>
+                <label for="first_name">First
+                    Name: </label>
+                <input type="text" value="{{user_model.first_name}}" id="first_name" name="first_name">
+            </div>
+            <div>
+                <label for="last_name">Last
+                    Name:</label>
+                <input type="text" value="{{ user_model.last_name }}" id="last_name" name="last_name">
+            </div>
+            <div>
+                <label for="email">Email:
+                </label>
+                <input type="text" value="{{user_model.email}}" id="email" name="email">
+            </div>
+            <input type="submit" value="Edit Profile">
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}

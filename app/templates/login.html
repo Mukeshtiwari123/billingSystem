@@ -310,11 +310,12 @@
                 </button>
             </div>
             <input type="checkbox" id="c"> <label for="c"><small>Remember me</small></label>
-            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-            <a href="forgot.html"><small> Forgot password?</small></a><br><br>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{% url 'forgot_password' %}"><small><small> Forgot password?</small></small></a><br><br>
+            
 
             <input type="submit" value="Login Now"><br><br>
-            <p align="center"><small>Don't have an account?</small><a href="{% url 'register' %}">Signup now</a>.
+            <p align="center"><small>Don't have an account?</small><a href="{% url 'register' %}"><small>Signup now</small></a>.
             </p>
         </form>
     </div>

@@ -25,6 +25,9 @@ from django.contrib.auth import views as auth_views
 from bills import views
 from django.contrib.auth.views import LoginView, LogoutView
 
+from django.conf.urls.static import static
+
+from django.conf import settings
 # from . import views  # Adjust this import based on your project structure
 # from .views import email_pdf
 
@@ -88,6 +91,15 @@ urlpatterns = [
     path('receipt/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
     # path('email/<int:pk>/pdf/', views.email_pdf, name='email_pdf'),
     path('email_pdf/<int:pk>/', views.email_pdf, name='email_pdf'),
+    
+    
+    # All forgot password urls..
+    path('forgot-password/', views.forgot_password_view, name='forgot_password'),
+    path('success/', views.success_page, name='success_page'),
+    
+    # All urls for the user profile
+    path('profile/',views.profile,name='profile'),
 
 ]
 
+urlpatterns=urlpatterns+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

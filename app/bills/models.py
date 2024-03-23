@@ -426,3 +426,20 @@ class StudentForm(forms.Form):
 
 
 
+# In your_app/models.py
+from django.db import models
+from django.contrib.auth.models import User
+from django.conf import settings
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+     # One-to-one relationship with the User model
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # Image field for the profile picture
+    # Assuming you have Pillow installed (as Django's ImageField requires Pillow)
+    image = models.ImageField(upload_to='profile_pics', default='default.jpg')
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
