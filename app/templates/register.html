@@ -27,10 +27,6 @@
 	}
 
 	.container {
-		animation: fadeIn 1s ease-out;
-	}
-
-	.container {
 		width: 300px;
 		margin: auto;
 		margin-top: 10px;
@@ -291,13 +287,12 @@
 
 
 			<div class="checkbox">
-				<input type="checkbox" name="terms" required><small>I accept the</small><a href="#">Terms and
-					Conditions</a><br><br>
+				<input type="checkbox" name="terms" required><small>I accept the</small><a href="#"><small>Terms and
+					Conditions</a></small><br><br>
 			</div>
 			<input type="submit" value="Register Now"><br><br>
-			<p align="center"><small>Already have an account?</small><a
-					href="/login">Login
-					Now</a>.</p>
+			<p align="center"><small>Already have an account?</small><small><a
+					href="{% url 'login' %}">Login Now</a>.</small></p>
 		</form>
 	</div>
 

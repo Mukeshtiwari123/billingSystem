@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-from .models import Charges,Bills,BillCharge,Receipt,ReceiptCharge,PaymentMode
+from .models import *
 # Register your models here.
-from .models import Item,Charges,Bills,BillCharge,BillItem,Receipt,ReceiptCharge,ReceiptItem
 
 
 
@@ -15,3 +14,5 @@ admin.site.register(Receipt)
 admin.site.register(ReceiptCharge)
 admin.site.register(ReceiptItem)
 admin.site.register(PaymentMode)
+admin.site.register(Profile)
+

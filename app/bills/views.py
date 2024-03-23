@@ -559,9 +559,16 @@ from .models import Profile
 from django.shortcuts import render
 from .models import Profile
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def profile(request):
-    user_profile=Profile.objects.get(user=request.user)
+    # if not request.user.is_authenticated:
+    #     return redirect('user_login')
+    # # user_profile=Profile.objects.get(user=request.user)
+   
+    user_profile = Profile.objects.get(user=request.user)
+
     user_model=User.objects.get(username=request.user)
     if request.method=='POST':
         print("abc")    
