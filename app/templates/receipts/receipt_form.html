@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 
 {% block content %}
 <div class="form-bill">
@@ -9,4 +9,88 @@
     <button type="submit">Save</button>
   </form>
 </div>
+{% endblock %} -->
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-receipt">
+    <h2>Add/Edit Bill</h2>
+    <form method="post" id="form-receipt">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div id="bil_remark">
+            <p><b>Note:</b> 
+                Bil items, Bil total with charges are readonly fields.
+                Total Changes will reflect on submit.
+            </p>
+        </div>
+        <div id="items-container">
+            <!-- Item fields will go here -->
+        </div>
+        <button type="button" onclick="addItem()">Add Item</button>
+        <textarea id="bil_items_json" name="bil_items_json" style="display:none;"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<script>
+    let items = [];
+
+    function addItem(item = { item: '', quantity: 0, cost_for_single_item: 0, total_cost: 0 }) {
+        items.push(item);
+        renderItems();
+    }
+
+    function updateItem(index, field, value) {
+        items[index][field] = value;
+        if (field === 'quantity' || field === 'cost_for_single_item') {
+            const quantity = items[index]['quantity'];
+            const costPerItem = items[index]['cost_for_single_item'];
+            items[index]['total_cost'] = quantity * costPerItem;
+        }
+        renderItems();
+    }
+
+    function removeItem(index) {
+        items.splice(index, 1);
+        renderItems();
+    }
+
+    function renderItems() {
+        const container = document.getElementById('items-container');
+        container.innerHTML = '';
+        items.forEach((item, index) => {
+            container.innerHTML += `<div>
+                Item: <input type="text" onchange="updateItem(${index}, 'item', this.value)" value="${item.item}">
+                Quantity: <input type="number" onchange="updateItem(${index}, 'quantity', parseInt(this.value))" value="${item.quantity}">
+                Cost per item: <input type="number" onchange="updateItem(${index}, 'cost_for_single_item', parseFloat(this.value))" value="${item.cost_for_single_item}">
+                Total cost: <input type="number" value="${item.total_cost}" readonly>
+                <button type="button" onclick="removeItem(${index})">Remove</button>
+            </div>`;
+        });
+        updateItemsField();
+    }
+
+    function updateItemsField() {
+        console.log("textarea stringify ===> ", JSON.stringify(items))
+        document.getElementById('bil_items_json').value = JSON.stringify(items);
+        document.getElementById('bil_items').value = JSON.stringify(items);
+    }
+
+    // Function to initialize the form with existing items data
+    function initializeItems() {
+        const existingItemsJson = JSON.stringify(eval(document.getElementById('bil_items_json').value));
+        console.log("textarea value ===> ", existingItemsJson)
+        if (existingItemsJson && existingItemsJson !== "null") {
+            console.log("t in extarea value ===> ", existingItemsJson === "null",typeof(existingItemsJson))
+            items = JSON.parse(existingItemsJson);
+            renderItems();
+        }
+    }
+
+    // Call initializeItems on page load
+    document.addEventListener('DOMContentLoaded', initializeItems);
+
+</script>
 {% endblock %}

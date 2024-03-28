@@ -24,19 +24,10 @@ from .models import PaymentMode
 from .forms import PaymentModeForm
 
 import json
-
-
+# for  bills pdf  generations
 from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("Welcome to my site!")
-
-
-from django.shortcuts import render
-
-@login_required
-def home(request):
-    return render(request, 'home.html')
+from .models import Bills, Receipt
+from .utils import render_to_pdf, send_email_with_pdf_attachment
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -48,6 +39,31 @@ import re
 
 from django.core.exceptions import ValidationError
 
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import Bills
+from .forms import EmailPDFForm
+from .utils import render_to_pdf  # Assuming this utility returns a PDF file as a HttpResponse
+
+from .models import Profile
+from django.shortcuts import render
+from .models import Profile
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+
+
+# def home(request):
+#     return HttpResponse("Welcome to my site!")
+
+# @login_required
+def home(request):
+    return render(request, 'home.html')
 
 class UserRegistrationForm(ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -74,34 +90,6 @@ class UserRegistrationForm(ModelForm):
 
 
 
-
-
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(request.POST)
-#         print("indrester")
-#         print(form.is_valid())
-#         print(UserRegistrationForm)
-#           # Print all key-value pairs from the POST data
-#         for key, value in request.POST.items():
-#             print(f"{key}: {value}")
-#         if form.is_valid():
-#             new_user = form.save(commit=False)
-#             new_user.set_password(form.cleaned_data['password'])
-#             new_user.save()
-#             # Authenticate and login are optional here, depending on whether you want to log the user in directly after registration
-#             user = authenticate(username=new_user.username, password=form.cleaned_data['password'])
-#             login(request, user)
-#             # Redirect to login page after successful registration
-#             return redirect('login')  # Use the name of your login route
-#     else:
-#         form = UserRegistrationForm()
-#     return render(request, 'register.html', {'form': form})
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-# from django.contrib import messages
-# from .forms import UserRegistrationForm  # Ensure you have the correct import path
 
 def register(request):
     message = ""
@@ -174,7 +162,7 @@ def charge_create(request):
     else:
         form = ChargesForm()
     return render(request, 'charges/charge_form.html', {'form': form})
-@login_required
+# @login_required
 # Read/List view
 def charge_list(request):
     charges = Charges.objects.all()
@@ -215,7 +203,7 @@ def bill_create(request):
         form = BillsForm()
     return render(request, 'bills/bill_form.html', {'form': form})
 
-# @login_required
+
 # # Create view
 # def bill_create(request, bill_id=None):
 #     bill = None
@@ -243,7 +231,7 @@ def bill_create(request):
 #         'items': items,  # Pass items to the template to prepopulate if editing
 #     })
 
-@login_required
+# @login_required
 # Read/List view
 def bill_list(request):
     bills = Bills.objects.all()
@@ -281,7 +269,7 @@ def bill_charge_create(request):
         form = BillChargeForm()
     return render(request, 'bill_charge/bill_charge_form.html', {'form': form})
 
-@login_required
+# @login_required
 # Read/List view
 def bill_charge_list(request):
     bill_charges = BillCharge.objects.all()
@@ -322,7 +310,7 @@ def receipt_create(request):
         form = ReceiptForm()
     return render(request, 'receipts/receipt_form.html', {'form': form})
 
-@login_required
+# @login_required
 # Read/List view
 def receipt_list(request):
     receipts = Receipt.objects.all()
@@ -368,7 +356,7 @@ def receipt_charge_create(request):
 def receipt_charge_list(request):
     receipt_charges = ReceiptCharge.objects.all()
     return render(request, 'receipt_charge/receipt_charge_list.html', {'receipt_charges': receipt_charges})
-@login_required
+# @login_required
 # @Update view
 def receipt_charge_update(request, pk):
     receipt_charge = get_object_or_404(ReceiptCharge, pk=pk)
@@ -390,7 +378,7 @@ def receipt_charge_delete(request, pk):
         return redirect('receipt_charge_list')
     return render(request, 'receipt_charge/receipt_charge_confirm_delete.html', {'object': receipt_charge})
 
-@login_required
+# @login_required
 def payment_mode_list(request):
     payment_modes = PaymentMode.objects.all()
     return render(request, 'payment_mode_list.html', {'payment_modes': payment_modes})
@@ -427,10 +415,7 @@ def payment_mode_delete(request, pk):
     return render(request, 'payment_mode_confirm_delete.html', {'payment_mode': payment_mode})
 
 
-# for  bills pdf  generations
-from django.http import HttpResponse
-from .models import Bills, Receipt
-from .utils import render_to_pdf, send_email_with_pdf_attachment
+
 
 def bill_pdf_view(request, pk):
     try:
@@ -448,12 +433,7 @@ def receipt_pdf_view(request, pk):
     except Receipt.DoesNotExist:
         return HttpResponse("Receipt not found.", status=404)
     
-from django.core.mail import EmailMessage
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
-from .models import Bills
-from .forms import EmailPDFForm
-from .utils import render_to_pdf  # Assuming this utility returns a PDF file as a HttpResponse
+
 # import logging
 
 # logger = logging.getLogger(__name__)
@@ -477,11 +457,6 @@ def email_pdf(request, pk):
             
             email = EmailMessage(subject, message, to=[recipient_email])
             email.attach('bill.pdf', pdf_content, 'application/pdf')
-            # try:
-            #     email.send()
-            # except Exception as e:
-            #     # Log the error or take appropriate actions
-            #     logger.error(f"Failed to send email: {e}")
             email.send()
 
             
@@ -554,12 +529,6 @@ def success_page(request):
 
 # user profile page 
 
-
-from .models import Profile
-from django.shortcuts import render
-from .models import Profile
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 @login_required
 def profile(request):

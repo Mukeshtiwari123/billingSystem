@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Receipt PDF</title>
+    <title>Bill PDF</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,11 +14,13 @@
             text-align: center;
             color: #666;
         }
-        .receipt-details {
+        .bill-info, .bill-details, .items-details {
             margin-top: 20px;
         }
-        .receipt-details th,
-        .receipt-details td {
+        .bill-details th,
+        .bill-details td,
+        .items-details th,
+        .items-details td {
             text-align: left;
             padding: 8px;
             border-bottom: 1px solid #ddd;
@@ -27,30 +29,64 @@
 </head>
 <body>
     <div class="header">
-        <h1>Receipt</h1>
+        <h1>Invoice</h1>
     </div>
 
-    <div class="receipt-info">
-        <p><strong>Receipt Number:</strong> {{ receipt.receipt_number }}</p>
-        <p><strong>Date:</strong> {{ receipt.receipt_date }}</p>
-        <p><strong>Description:</strong> {{ receipt.receipt_description }}</p>
+    <div class="bill-info">
+        <p><strong>Bill Number:</strong> {{ bill.bil_number }}</p>
+        <p><strong>Date:</strong> {{ bill.bil_receipt_date }}</p>
+        <p><strong>Description:</strong> {{ bill.bil_description }}</p>
     </div>
 
-    <table class="receipt-details">
+    <!-- Bill Items -->
+    <h2>Items</h2>
+    <table class="items-details">
         <tr>
-            <th>Charge Title</th>
-            <th>Amount</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Cost</th>
         </tr>
-        {% for charge in receipt.receipt_charges.all %}
+        {% for item in bill.get_items %}
         <tr>
-            <td>{{ charge.charge_title }}</td>
-            <td>${{ charge.charge_fixed_rate }}</td>
+            <td>{{ item.item }}</td>
+            <td>{{ item.quantity }}</td>
+            <td> ₹{{ item.cost_for_single_item }}</td>
+            <td> ₹{{ item.total_cost }}</td>
         </tr>
         {% endfor %}
     </table>
 
+    <!-- Charges -->
+    <h2>Charges</h2>
+    <table class="bill-details">
+        <tr>
+            <th>Charge Title</th>
+            <th>Type</th>
+            <th>Amount</th>
+        </tr>
+        {% for charge in bill.bil_charges.all %}
+        <tr>
+            <td>{{ charge.charge_title }}</td>
+            <td>{{ charge.get_charge_type_display }}</td> <!-- Assuming you have a get_<field_name>_display method -->
+            <td>
+                {% if charge.charge_type == 'fixed' %}
+                 ₹{{ charge.charge_fixed_rate }}
+                {% else %}
+                {{ charge.charge_percentage }}%
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Total -->
+    <div class="total">
+        <p><strong>Total Amount:</strong>  ₹{{ bill.bil_total_with_charges }}</p>
+    </div>
+
     <div class="footer">
-        <p><big>Thank you for use!</big></p>
+        <p>Thank you for your business!</p>
     </div>
 </body>
 </html>

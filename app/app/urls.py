@@ -35,7 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('index/', views.index),
     # path('example/', views.example_view),
-    path('', views.home, name='home'),  # Map the root URL to the home view
+    path('', views.home, name='home'), # Map the root URL to the home view
     # Include other URL patterns below
 
     # Your other URL patterns
@@ -91,6 +91,7 @@ urlpatterns = [
     path('receipt/<int:pk>/pdf/', receipt_pdf_view, name='receipt_pdf'),
     # path('email/<int:pk>/pdf/', views.email_pdf, name='email_pdf'),
     path('email_pdf/<int:pk>/', views.email_pdf, name='email_pdf'),
+     path('email_pdf/<int:pk>/', views.email_pdf, name='email_pdf'),
     
     
     # All forgot password urls..

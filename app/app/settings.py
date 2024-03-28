@@ -52,7 +52,7 @@ MIDDLEWARE = [
 ]
 
 
-CSRF_TRUSTED_ORIGINS = ['https://*.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-mukeshtiwar-billingsyst-ic58z917pt6.ws-us110.gitpod.io']
 
 CORS_ORIGIN_WHITELIST = ['*']
 
@@ -154,23 +154,39 @@ LOGIN_REDIRECT_URL = '/bills'
 LOGOUT_REDIRECT_URL = '/'
 
 # Email Configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'muk142005@gmail.com'  # Replace with your email address
+# EMAIL_HOST_PASSWORD = 'jsrbooztjqulcfnt'  # Replace with your email password
+# #jsrb oozt jqul cfnt
+# # settings.py
+
+# ... other settings ...
+
+# Email Configuration
+#EMAIL_BACKEND= 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'mail.ikshvakusolutions.com'
+#EMAIL_PORT = 465
+#EMAIL_USE_SSL = True
+#EMAIL_USE_TLS = False
+#EMAIL_HOST_USER = 'egnw332v3w.dummy.testing.purpose.only@ikshvakusolutions.com'  # Replace with your email address
+#EMAIL_HOST_PASSWORD = '7Lcdkp7K?tvL'  # Replace with your email password
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# from django.core.mail import send_mail
+# from django.conf import settings
+# send_mail(subject='Add an eye-catching subject',message='Write an amazing message',from_email=settings.EMAIL_HOST_USER,recipient_list=['shaikhhaseeb301@gmail.com'])
+
+
+
+ # Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'muk142005@gmail.com'  # Replace with your email address
-EMAIL_HOST_PASSWORD = 'jsrbooztjqulcfnt'  # Replace with your email password
-#jsrb oozt jqul cfnt
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.ikshvakusolutions.com'
+EMAIL_HOST = 'mail.boxbox.fun'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
-EMAIL_HOST_USER = 'EGNW332V3W.dummy.testing.purpose.only@ikshvakusolutions.com'  # Replace with your email address
-EMAIL_HOST_PASSWORD = 'BkJ6rCG#Ge-v'  # Replace with your email password
+EMAIL_HOST_USER = 'mukesh.tiwari@boxbox.fun'  # Replace with your email address
+EMAIL_HOST_PASSWORD = '5G6hIQfK7p@n'  # Replace with your email password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

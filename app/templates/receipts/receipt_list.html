@@ -11,6 +11,7 @@
       <a href="{% url 'receipt_update' receipt.pk %}">Edit</a> |
       <a href="{% url 'receipt_delete' receipt.pk %}">Delete</a>
       <a href="{% url 'receipt_pdf' pk=receipt.pk %}" class="btn btn-primary" target="_blank">Generate PDF</a>
+      <a href="{% url 'email_pdf' pk=bill.pk %}" class="btn btn-primary" target="_blank">Email PDF</a>
     </li>
     {% endfor %}
   </ul>
